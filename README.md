@@ -1,6 +1,6 @@
 # Helios Corn Futures Climate Risk Challenge
 
-This repository contains code and results from participants in the **Helios Climate Risk Kaggle Challenge (Corn Futures)**.
+This repository contains code and results from participants in the **Helios Climate Risk Kaggle Challenge**.
 
 ## Purpose
 The goal of this repository is to collect:
