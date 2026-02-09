@@ -2,7 +2,6 @@
 
 > **Generated:** 2026-02-09  
 > **Competition:** Helios Corn Futures Climate Challenge  
-> **Participants Reviewed:** 16 (2 disqualified participants removed)
 
 ---
 
@@ -822,7 +821,5 @@ Domain-driven approach incorporating **phenology** (crop growth stages) to weigh
 
 ---
 
-> **Document Version:** 2.0  
 > **Last Updated:** 2026-02-09  
-> **Changes:** Removed CFCS scores (pending final evaluation), removed disqualified participants, added winner placeholders  
-> **Reviewed By:** Competition Verification Team
+> **Reviewed By:** Helios AI
