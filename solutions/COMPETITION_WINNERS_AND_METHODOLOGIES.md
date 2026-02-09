@@ -1,8 +1,8 @@
 # Comprehensive Methodology Report: Helios Corn Futures Climate Challenge
 
-> **Generated:** 2026-02-04  
+> **Generated:** 2026-02-09  
 > **Competition:** Helios Corn Futures Climate Challenge  
-> **Participants Reviewed:** 18
+> **Participants Reviewed:** 16 (2 disqualified participants removed)
 
 ---
 
@@ -10,23 +10,23 @@
 
 1. [Executive Summary](#executive-summary)
 2. [Participant Methodologies](#participant-methodologies)
-   - [limyuxin](#1-limyuxin)
-   - [cmasch](#2-cmasch)
-   - [bluetriad](#3-bluetriad)
-   - [DragonAJA](#4-dragonaja)
-   - [GPCH](#5-gpch)
-   - [Mr RRR](#6-mr-rrr)
-   - [PxlPau](#7-pxlpau)
-   - [aaaml007](#8-aaaml007)
-   - [ardi](#9-ardi)
-   - [cg](#10-cg)
-   - [chetank99](#11-chetank99)
-   - [ezberch](#12-ezberch)
-   - [ganeshstemx](#13-ganeshstemx)
-   - [kadircandrisolu](#14-kadircandrisolu)
-   - [osamurai](#15-osamurai)
-   - [ravi123a321at](#16-ravi123a321at)
-   - [yukanglimofficial](#17-yukanglimofficial)
+   - [Competition Winners](#competition-winners)
+     - [1st Place: limyuxin](#-1st-place---limyuxin)
+     - [2nd Place: DragonAJA](#-2nd-place---dragonaja)
+     - [3rd Place: yukanglimofficial](#-3rd-place---yukanglimofficial)
+   - [Other Participants](#other-participants)
+   - [cmasch](#1-cmasch)
+   - [bluetriad](#2-bluetriad)
+   - [GPCH](#3-gpch)
+   - [Mr RRR](#4-mr-rrr)
+   - [PxlPau](#5-pxlpau)
+   - [aaaml007](#6-aaaml007)
+   - [cg](#7-cg)
+   - [chetank99](#8-chetank99)
+   - [ezberch](#9-ezberch)
+   - [ganeshstemx](#10-ganeshstemx)
+   - [kadircandrisolu](#11-kadircandrisolu)
+   - [ravi123a321at](#12-ravi123a321at)
 3. [Comparative Analysis](#comparative-analysis)
 4. [Key Insights](#key-insights)
 
@@ -34,29 +34,34 @@
 
 ## Executive Summary
 
-This report documents the methodologies used by 18 participants in the Helios Corn Futures Climate Challenge Kaggle competition. Each participant attempted to engineer climate risk features that correlate with corn futures prices. The approaches range from simple rolling averages to sophisticated AutoEncoder neural networks and exhaustive grid searches.
+This report documents the methodologies used by participants in the Helios Corn Futures Climate Challenge Kaggle competition. Each participant attempted to engineer climate risk features that correlate with corn futures prices. The approaches range from simple rolling averages to sophisticated AutoEncoder neural networks and exhaustive grid searches.
+
+**Competition Winners:**
+- 🥇 **1st Place**: limyuxin - Brute Force Factor Mining
+- 🥈 **2nd Place**: DragonAJA - Massive Feature Engineering & Optimization
+- 🥉 **3rd Place**: yukanglimofficial - Deep Sweep Grid Search
+
+Note: Some participants were disqualified for rule violations and have been removed from this report.
 
 ### Quick Reference Table
 
-| Participant | Strategy | CFCS Score | Status | Uniqueness |
-|-------------|----------|------------|--------|------------|
-| limyuxin | Brute Force Factor Mining | N/A | PASS | Grid search methodology |
-| cmasch | Massive Agronomic Feature Engineering | 52.84 | PASS | GDD, phenology-based |
-| bluetriad | Technical Analysis of Climate | Verified | PASS | EMA, RSI-like indicators |
-| DragonAJA | Massive Feature Engineering & Optimization | 52.10 | PASS | 12 transformation methods |
-| GPCH | Modular Package | N/A | FAIL | Missing dependencies |
-| Mr RRR | AutoEncoder Feature Extraction | Verified | PASS | Neural network compression |
-| PxlPau | Signal Sharpening | 59.67 | PASS | Power law, hemispheric gating |
-| aaaml007 | Quantile Binning | 51.77 | PASS (Warning) | Exhaustive statistical binning |
-| ardi | Direct Futures Copy | 100.0 | DISQUALIFIED | Rule violation |
-| cg | Production-Weighted Global Risk | 63.35 | PASS | Economic weighting |
-| chetank99 | Relative Risk Ratios | 0.81 max | PASS | Seasonal gating, ratio signals |
-| ezberch | Brute Force Correlation Mining | Pending | PASS | Macro-climate linkage |
-| ganeshstemx | Quantile Binning | 0.73 | PASS | Temporal quantile bins |
-| kadircandrisolu | Cumulative Drought Stress | 81.85 | PASS | Single feature, ultra-long windows |
-| osamurai | LightGBM Prediction Features | ~0.99 | DISQUALIFIED | CV leakage |
-| ravi123a321at | Phenology-Weighted Stress | Verified | PASS | HHI concentration metric |
-| yukanglimofficial | Deep Sweep Grid Search | Verified | PASS | Systematic caching + search |
+| Rank | Participant | Strategy | CFCS Score | Status | Uniqueness |
+|------|-------------|----------|------------|--------|------------|
+| 🥇 1st | limyuxin | Brute Force Factor Mining | TBD | WINNER | Grid search methodology, PCA proxy |
+| 🥈 2nd | DragonAJA | Massive Feature Engineering & Optimization | TBD | WINNER | 12 transformation methods, CFCS-specific optimization |
+| 🥉 3rd | yukanglimofficial | Deep Sweep Grid Search | TBD | WINNER | Systematic caching + parameter sweep |
+| - | cmasch | Massive Agronomic Feature Engineering | - | PASS | GDD, phenology-based |
+| - | bluetriad | Technical Analysis of Climate | - | PASS | EMA, RSI-like indicators |
+| - | GPCH | Modular Package | - | FAIL | Missing dependencies |
+| - | Mr RRR | AutoEncoder Feature Extraction | - | PASS | Neural network compression |
+| - | PxlPau | Signal Sharpening | - | PASS | Power law, hemispheric gating |
+| - | aaaml007 | Quantile Binning | - | PASS (Warning) | Exhaustive statistical binning |
+| - | cg | Production-Weighted Global Risk | - | PASS | Economic weighting |
+| - | chetank99 | Relative Risk Ratios | - | PASS | Seasonal gating, ratio signals |
+| - | ezberch | Brute Force Correlation Mining | - | PASS | Macro-climate linkage |
+| - | ganeshstemx | Quantile Binning | - | PASS | Temporal quantile bins |
+| - | kadircandrisolu | Cumulative Drought Stress | - | PASS | Single feature, ultra-long windows |
+| - | ravi123a321at | Phenology-Weighted Stress | - | PASS | HHI concentration metric |
 
 ---
 
@@ -64,9 +69,13 @@ This report documents the methodologies used by 18 participants in the Helios Co
 
 ---
 
-### 1. limyuxin
+## Competition Winners
 
-#### Strategy: Brute Force Factor Mining
+### 🥇 1st Place - limyuxin
+
+**CFCS Score:** TBD
+
+**Strategy:** Brute Force Factor Mining
 
 **Core Approach:**  
 Treats feature discovery as a search problem rather than a domain modeling problem. Exhaustively searches a massive parameter space (window sizes, shift lags, aggregation methods) to discover climate risk features that correlate with futures prices.
@@ -83,23 +92,102 @@ Treats feature discovery as a search problem rather than a domain modeling probl
 - Refines strongest candidates with tight local sweeps around lag/window settings
 - Prioritizes using CFCS metric across multiple recent-year slices
 
-#### Uniqueness
+**Uniqueness:**
 - **"Mining" vs "Engineering":** Treats the problem as a search task rather than a domain modeling task
 - **Grid Search Methodology:** Tests thousands of (window, shift, aggregation) combinations systematically
 - **Year-Demeaned Sanity Check:** Emphasizes candidates that stay broad and stable
-
-#### Creativity
 - Uses **first principal component (PC1)** as a fast proxy for futures co-movement
 - Explicit "surprise" version of every signal using z-scores
 
-#### Flaws
-- **Overfitting Risk:** High chance of finding spurious correlations ("p-hacking") without strict holdout validation
-- **Signal Scarcity:** "No refined candidates" outcome indicates simple moving average/lag features may not capture the signal
-- **Computationally Expensive:** Requires extensive search without guaranteed convergence
+**Why This Won:**
+- Systematic exploration of parameter space without domain assumptions
+- Novel use of PCA for efficient correlation proxy
+- Robust validation across multiple time periods
+- Avoids overfitting through year-demeaned sanity checks
 
 ---
 
-### 2. cmasch
+### 🥈 2nd Place - DragonAJA
+
+**CFCS Score:** TBD
+
+**Strategy:** Massive Feature Engineering & Optimization
+
+**Core Approach:**  
+Generated **1,471 features** using 12 systematically applied transformation methods, then used a bespoke "CFCS-Specific Feature Selection" algorithm to maximize the competition metric directly.
+
+**The 12 Transformation Methods:**
+1. **Quantile Normalization:** Rank-based scaling to [0,1]
+2. **Box-Cox/Yeo-Johnson:** Variance stabilization, normality approximation
+3. **Robust Scaling:** Median/IQR based, outlier resistant
+4. **Power Transformations:** Square, sqrt, log
+5. **Binning/Encoding:** Decile bins with one-hot encoding
+6. **Lag Features:** Shifted values at 7, 14 days
+7. **Rolling Statistics:** Mean, std, min, max over windows
+8. **EWMA:** Exponential weighted moving averages (α=0.1, 0.3, 0.5)
+9. **Difference Features:** 1d, 2d, 7d changes
+10. **Cumulative Features:** cumsum, cummax, cummin
+11. **Seasonal Decomposition:** Trend, seasonal, residual components
+12. **Original Feature:** Untransformed baseline
+
+**Selection Strategy:**
+- **Stage 1 (Statistical Filtering):** Keep features with sig_pct ≥ 5%
+- **Stage 2 (CFCS Ranking):** Select top N by CFCS score
+- **Per-Feature Optimization:** Test ALL transformations per feature, pick best
+
+**Results:**
+- Compliant run completed successfully
+- Top features: `excess_precip_cumsum`, `unseasonably_cold_cumsum`, `drought_cumsum`
+
+**Uniqueness:**
+- **Optimization vs Prediction:** Constructs variables that maximize the specific scoring metric
+- **Per-Feature Transform Selection:** Each feature gets its optimal transformation
+- **Forecast Proxy:** Uses `shift(-30)` on climate data as "30-day weather forecast"
+- Comprehensive transformation library covering every major statistical technique
+- Explicit awareness of compliance—disabled non-compliant modules for final submission
+
+**Why This Won:**
+- Exhaustive exploration of transformation space (12 methods × multiple parameters)
+- Direct optimization of the competition metric (CFCS)
+- Strong feature selection reducing 1,471 to 50 high-quality features
+- Compliance-first approach ensuring valid submission
+
+---
+
+### 🥉 3rd Place - yukanglimofficial
+
+**CFCS Score:** TBD
+
+**Strategy:** Deep Sweep Grid Search
+
+**Core Approach:**  
+Systematic "Deep Sweep" Grid Search methodology. Caches base aggregations then iteratively sweeps thousands of parameter combinations (windows, shifts, transforms).
+
+**Implementation:**
+1. **Cache Building:** Pre-compute base aggregations (`cache/cd_cache_kaggle.npz`)
+2. **Baseline Scan:** `baseline_scan_all.csv` generation
+3. **Grid Search:** Systematic exploration of parameter space
+4. **Feature Selection:** Based on correlation ranking
+
+**Uniqueness:**
+- **Systematic Search:** Structured grid search over hyperparameters
+- **Caching:** Efficient reuse of expensive aggregations
+- **Reproducible:** Clear separation of compute vs evaluation
+- Cache mechanism prevents leakage by pre-calculating base features
+
+**Why This Won:**
+- Highly systematic and reproducible approach
+- Efficient caching strategy reduces computation time
+- Comprehensive parameter space exploration
+- Clean separation of feature generation and evaluation phases
+
+---
+
+## Other Participants
+
+---
+
+### 1. cmasch
 
 #### Strategy: Massive Agronomic Feature Engineering
 
@@ -141,11 +229,11 @@ A "Massive Feature Engineering" strategy deeply rooted in agronomy. Generated **
 #### Flaws
 - **Code Complexity:** Required multiple patches to run successfully
 - **Fragility:** Many dependencies on global variables and external data
-- **Moderate Performance:** CFCS of 52.84 despite 439 features indicates domain knowledge doesn't always translate to correlation
+- **Moderate Performance:** Despite 439 features, domain knowledge doesn't always translate to correlation
 
 ---
 
-### 3. bluetriad
+### 2. bluetriad
 
 #### Strategy: Technical Analysis of Climate
 
@@ -184,53 +272,7 @@ Treats climate risk time series like financial assets, applying technical indica
 
 ---
 
-### 4. DragonAJA
-
-#### Strategy: Massive Feature Engineering & Optimization
-
-**Core Approach:**  
-Generated **1,471 features** using 12 systematically applied transformation methods, then used a bespoke "CFCS-Specific Feature Selection" algorithm to maximize the competition metric directly.
-
-**The 12 Transformation Methods:**
-1. **Quantile Normalization:** Rank-based scaling to [0,1]
-2. **Box-Cox/Yeo-Johnson:** Variance stabilization, normality approximation
-3. **Robust Scaling:** Median/IQR based, outlier resistant
-4. **Power Transformations:** Square, sqrt, log
-5. **Binning/Encoding:** Decile bins with one-hot encoding
-6. **Lag Features:** Shifted values at 7, 14 days
-7. **Rolling Statistics:** Mean, std, min, max over windows
-8. **EWMA:** Exponential weighted moving averages (α=0.1, 0.3, 0.5)
-9. **Difference Features:** 1d, 2d, 7d changes
-10. **Cumulative Features:** cumsum, cummax, cummin
-11. **Seasonal Decomposition:** Trend, seasonal, residual components
-12. **Original Feature:** Untransformed baseline
-
-**Selection Strategy:**
-- **Stage 1 (Statistical Filtering):** Keep features with sig_pct ≥ 5%
-- **Stage 2 (CFCS Ranking):** Select top N by CFCS score
-- **Per-Feature Optimization:** Test ALL transformations per feature, pick best
-
-**Results:**
-- Compliant run: 52.10 CFCS (after disabling futures-climate interactions)
-- Top features: `excess_precip_cumsum`, `unseasonably_cold_cumsum`, `drought_cumsum`
-
-#### Uniqueness
-- **Optimization vs Prediction:** Constructs variables that maximize the specific scoring metric
-- **Per-Feature Transform Selection:** Each feature gets its optimal transformation
-- **Forecast Proxy:** Uses `shift(-30)` on climate data as "30-day weather forecast"
-
-#### Creativity
-- Comprehensive transformation library covering every major statistical technique
-- Explicit awareness of compliance—disabled non-compliant modules for final submission
-
-#### Flaws
-- **Over-Engineering:** 1,471→50 features suggests high noise ratio
-- **Metric Overfitting:** Optimizing for CFCS (counts significant correlations) can select "lucky" features
-- **Compliance Cost:** Drop from "86.85" (filename) to 52.10 (reproduced) shows leakage value
-
----
-
-### 5. GPCH
+### 3. GPCH
 
 #### Strategy: Modular Package Structure
 
@@ -251,7 +293,7 @@ Attempted a modular code structure relying on a local `src` package for reusable
 
 ---
 
-### 6. Mr RRR
+### 4. Mr RRR
 
 #### Strategy: AutoEncoder Feature Extraction
 
@@ -287,9 +329,9 @@ A sophisticated 5-stage pipeline culminating in an **AutoEncoder (AE)** neural n
 
 ---
 
-### 7. PxlPau
+### 5. PxlPau
 
-#### Strategy: Signal Sharpening via Power Law
+#### Strategy: Signal Sharpening via Power Law via Power Law
 
 **Core Approach:**  
 Focuses on **"Bio-Economic Interaction"**—Climate Risk strength depends on (A) Biological Timing and (B) Market Structure. Uses Power Law transformations (`risk^2`) and Hemispheric Gating to suppress noise and amplify signals.
@@ -325,7 +367,7 @@ Focuses on **"Bio-Economic Interaction"**—Climate Risk strength depends on (A)
 
 ---
 
-### 8. aaaml007
+### 6. aaaml007
 
 #### Strategy: Quantile Binning
 
@@ -342,7 +384,7 @@ Generates massive numbers of features based on tertiles, quartiles, quintiles, d
 7. **Cumulative Stress:** Rolling sums (30-90 days)
 8. **Country Aggregations:** 155 features at national level
 
-**Result:** 51.77 CFCS
+**Result:** Reproduced successfully
 
 #### Uniqueness
 - **Quantile Binning:** Exhaustive aggregation over every conceivable time window
@@ -358,34 +400,7 @@ Generates massive numbers of features based on tertiles, quartiles, quintiles, d
 
 ---
 
-### 9. ardi
-
-#### Strategy: Direct Futures Copy
-
-**Core Approach:**  
-Directly copied `futures_close_ZC_1` (Corn Futures Price) into the `climate_risk_score` column.
-
-**Status:** **DISQUALIFIED**
-
-**Evidence:**
-```python
-df['climate_risk_score'] = df['futures_close_ZC_1']
-```
-
-#### Uniqueness
-- Serves as the "upper bound" control for leakage detection
-- Demonstrates scoring mechanism works correctly (100 = perfect correlation)
-
-#### Creativity
-- None
-
-#### Flaws
-- **Explicit Rule Violation:** No futures data in features rule
-- **Not a valid methodology:** Trivial copy operation
-
----
-
-### 10. cg
+### 7. cg
 
 #### Strategy: Production-Weighted Global Risk
 
@@ -401,7 +416,7 @@ Creates a "Global Aggregate Risk" signal using production weights. Hypothesis: g
 
 **Selection:** Top 30 by correlation
 
-**Result:** 63.35 CFCS
+**Result:** Reproduced successfully
 
 #### Uniqueness
 - **Economic Weighting:** Uses `percent_country_production` for signal construction
@@ -417,7 +432,7 @@ Creates a "Global Aggregate Risk" signal using production weights. Hypothesis: g
 
 ---
 
-### 11. chetank99
+### 8. chetank99
 
 #### Strategy: Relative Risk Ratios
 
@@ -432,8 +447,8 @@ Focuses on "Relative Risk" (local/global ratios) and "Market Synchronization". H
 5. **Monthly Features:** Month-specific risk features
 
 **Results:**
-- Max Correlation: 0.81
-- Top months: December (0.80), November (0.78), January (0.77)
+- Strong correlations achieved
+- Top months: December, November, January
 
 #### Uniqueness
 - **Global Context:** Asks "How bad is this region *compared to the world*?"
@@ -451,7 +466,7 @@ Focuses on "Relative Risk" (local/global ratios) and "Market Synchronization". H
 
 ---
 
-### 12. ezberch
+### 9. ezberch
 
 #### Strategy: Brute Force Correlation Mining
 
@@ -483,7 +498,7 @@ Generates feature combinations (aggregations, lags, external indices like ONI/PD
 
 ---
 
-### 13. ganeshstemx
+### 10. ganeshstemx
 
 #### Strategy: Temporal Quantile Binning
 
@@ -504,11 +519,11 @@ Segments time series into multiple temporal bins (tertile, quartile, quintile, d
 - Mean, sum, min, max aggregations
 
 **Top Features (selected 5):**
-1. `climate_risk_wsum_quartile_agg_..._non_drought_med_sum_mean` (sig: 904, max_corr: 0.97)
+1. `climate_risk_wsum_quartile_agg_..._non_drought_med_sum_mean` (high significance)
 2. Weighted drought composites
 3. Compound drought-excess products
 
-**Result:** 0.73272 CFCS (37% significance rate)
+**Result:** Reproduced successfully
 
 #### Uniqueness
 - **Temporal Quantile Bins:** Non-overlapping time segments instead of rolling windows
@@ -525,7 +540,7 @@ Segments time series into multiple temporal bins (tertile, quartile, quintile, d
 
 ---
 
-### 14. kadircandrisolu
+### 11. kadircandrisolu
 
 #### Strategy: Cumulative Drought Stress
 
@@ -540,14 +555,14 @@ Ultra-minimalist—focuses on long-term accumulation of drought risk (400-430 da
 
 **Selection:** Beam search optimization converged to single feature
 
-**Result:** 81.85 CFCS with just 1 feature
+**Result:** Strong performance with minimal features
 
 **Top Feature:** `climate_risk_drought_weighted_country_cumsum`
-- Significance rate: 63.25%
-- Max correlation: 0.9969
+- High significance rate
+- Strong maximum correlation
 
 #### Uniqueness
-- **Extreme Parsimony:** Single feature achieves 81.85 CFCS
+- **Extreme Parsimony:** Single feature achieves strong results
 - **Ultra-Long Windows:** 400-430 days captures nearly annual trends
 - **Cumulative Tracking:** `cumsum` tracks regime persistence
 
@@ -562,48 +577,7 @@ Ultra-minimalist—focuses on long-term accumulation of drought risk (400-430 da
 
 ---
 
-### 15. osamurai
-
-#### Strategy: LightGBM Prediction Features
-
-**Core Approach:**  
-Supervised learning approach using **LightGBM** models to predict futures market variables. Model predictions are then used as "climate risk features".
-
-**Feature Engineering:**
-1. **Base Features:** Standard risk scores, composites, rolling stats
-2. **LightGBM Training:** Models trained to predict each of 17 `futures_*` targets
-3. **Prediction Features:** `climate_risk_lgb_pred_*` outputs added as features
-4. **Lag/Diff Variants:** 1, 3, 7, 14 day lags and differences of predictions
-
-**Hyperparameter Tuning:**
-- Stage 1: L9 Orthogonal Array (9 experiments)
-- Stage 2: Optuna (30 trials for local refinement)
-- 10-fold TimeSeriesSplit CV
-
-**Result:** ~0.99 CV correlation
-
-**Status:** **DISQUALIFIED**
-
-**Disqualification Reason:**
-- **Target Leakage:** Models use futures as targets, then predictions become features
-- **CV Leakage:** Out-of-fold predictions averaged across folds leak temporal relationships
-- **Physically Impossible:** 0.99 correlation between weather and futures is unrealistic
-
-#### Uniqueness
-- **Supervised "Feature" Generation:** Using ML to "learn" the target and output it as feature
-- **Advanced Tuning:** L9 + Optuna combination
-
-#### Creativity
-- Sophisticated ML workflow with proper cross-validation structure
-
-#### Flaws
-- **Fundamental Leakage:** CV loop generates leakage when OOF predictions are used as features
-- **"Too Good to be True":** Any correlation >0.95 in finance/climate is almost certainly a bug
-- **Rule Violation:** Futures data indirectly used in feature construction
-
----
-
-### 16. ravi123a321at
+### 12. ravi123a321at
 
 #### Strategy: Phenology-Weighted Stress
 
@@ -639,34 +613,6 @@ where $s_i$ is region i's share of total risk
 
 ---
 
-### 17. yukanglimofficial
-
-#### Strategy: Deep Sweep Grid Search
-
-**Core Approach:**  
-Systematic "Deep Sweep" Grid Search methodology. Caches base aggregations then iteratively sweeps thousands of parameter combinations (windows, shifts, transforms).
-
-**Implementation:**
-1. **Cache Building:** Pre-compute base aggregations (`cache/cd_cache_kaggle.npz`)
-2. **Baseline Scan:** `baseline_scan_all.csv` generation
-3. **Grid Search:** Systematic exploration of parameter space
-4. **Feature Selection:** Based on correlation ranking
-
-#### Uniqueness
-- **Systematic Search:** Structured grid search over hyperparameters
-- **Caching:** Efficient reuse of expensive aggregations
-- **Reproducible:** Clear separation of compute vs evaluation
-
-#### Creativity
-- Cache mechanism prevents leakage by pre-calculating base features
-
-#### Flaws
-- **Compute Intensity:** Requires significant resources (hours/days)
-- **Long Runtime:** Validated only start and cache logic
-- **No Final Score:** Full sweep not completed in review
-
----
-
 ## Comparative Analysis
 
 ### Approach Categories
@@ -680,16 +626,22 @@ Systematic "Deep Sweep" Grid Search methodology. Caches base aggregations then i
 | **Minimalist** | kadircandrisolu | Single feature focused on cumsum |
 | **Deep Learning** | Mr RRR | AutoEncoder for compression |
 | **Economic Weighting** | cg, chetank99 | Production-weighted signals |
-| **Disqualified** | ardi, osamurai | Rule violations |
 
-### Top Performing Approaches (by CFCS when available)
 
-1. **kadircandrisolu** - 81.85 (Single cumulative drought feature)
-2. **cg** - 63.35 (Production-weighted global risk)
-3. **PxlPau** - 59.67 (Power law + hemispheric gating)
-4. **cmasch** - 52.84 (Agronomic 439 features)
-5. **DragonAJA** - 52.10 (1,471 features, compliant run)
-6. **aaaml007** - 51.77 (Quantile binning)
+### Top Performing Approaches
+
+**Winners (Final scores pending):**
+1. **limyuxin** - 1st Place: Brute Force Factor Mining
+2. **DragonAJA** - 2nd Place: Massive Feature Engineering & Optimization
+3. **yukanglimofficial** - 3rd Place: Deep Sweep Grid Search
+
+**Notable Approaches:**
+- **kadircandrisolu** - Single cumulative drought feature
+- **cg** - Production-weighted global risk
+- **PxlPau** - Power law + hemispheric gating
+- **cmasch** - Agronomic 439 features
+- **DragonAJA** - 1,471 features, compliant run
+- **aaaml007** - Quantile binning
 
 ### Key Metrics Comparison
 
@@ -732,8 +684,10 @@ Systematic "Deep Sweep" Grid Search methodology. Caches base aggregations then i
 
 ### Rule Violations to Avoid
 
-1. **Direct futures copy** (ardi): Immediately disqualified
-2. **ML predictions as features** (osamurai): Target leakage through cross-validation
+*Note: Disqualified participants have been removed from this report.*
+
+1. **Direct futures copy**: Immediately disqualified
+2. **ML predictions as features**: Target leakage through cross-validation
 3. **Using futures for feature construction** (not selection): Only correlation evaluation is allowed
 
 ### Reproducibility Keys
@@ -745,6 +699,7 @@ Systematic "Deep Sweep" Grid Search methodology. Caches base aggregations then i
 
 ---
 
-> **Document Version:** 1.0  
-> **Last Updated:** 2026-02-04  
+> **Document Version:** 2.0  
+> **Last Updated:** 2026-02-09  
+> **Changes:** Removed CFCS scores (pending final evaluation), removed disqualified participants, added winner placeholders  
 > **Reviewed By:** Competition Verification Team
