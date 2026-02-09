@@ -55,24 +55,24 @@ This report documents the methodologies used by participants in the Helios Corn 
 
 ### Quick Reference Table
 
-| Rank | Participant | Strategy | CFCS Score | Status | Uniqueness |
-|------|-------------|----------|------------|--------|------------|
-| 🥇 46 | [limyuxin](https://www.kaggle.com/limyuxin) | Brute Force Factor Mining | **88.82** | WINNER | Grid search methodology, PCA proxy |
-| 🥈 48 | [DragonAJA](https://www.kaggle.com/dragonaja) | Massive Feature Engineering & Optimization | **86.85** | WINNER | 12 transformation methods, CFCS-specific optimization |
-| 🥉 49 | [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) | Deep Sweep Grid Search | **84.20** | WINNER | Systematic caching + parameter sweep |
-| 80 | [cmasch](https://www.kaggle.com/cmasch) | Massive Agronomic Feature Engineering | 69.01 | PASS | GDD, phenology-based |
-| 69 | [bluetriad](https://www.kaggle.com/bluetriad) | Technical Analysis of Climate | 76.29 | PASS | EMA, RSI-like indicators |
-| 73 | [GPCH2159](https://www.kaggle.com/gpch2159) | Modular Package | 74.23 | FAIL | Missing dependencies |
-| 84 | [Mr RRR](https://www.kaggle.com/larrylin666) | AutoEncoder Feature Extraction | 66.33 | PASS | Neural network compression |
-| 97 | [PxlPau](https://www.kaggle.com/studybeetutoring) | Signal Sharpening | 59.67 | PASS | Power law, hemispheric gating |
-| 44 | [aaaml007](https://www.kaggle.com/aaaml007) | Quantile Binning | 100.00 | PASS (Warning) | Exhaustive statistical binning |
-| 54 | [cg](https://www.kaggle.com/chaitanyagarg2) | Production-Weighted Global Risk | 82.35 | PASS | Economic weighting |
-| 68 | [chetank99](https://www.kaggle.com/chetank99) | Relative Risk Ratios | 77.07 | PASS | Seasonal gating, ratio signals |
-| 63 | [ezberch](https://www.kaggle.com/ezberch) | Brute Force Correlation Mining | 80.47 | PASS | Macro-climate linkage |
-| 67 | [ganeshstemx](https://www.kaggle.com/ganeshstemx) | Quantile Binning | 78.17 | PASS | Temporal quantile bins |
-| 65 | [kadircandrisolu](https://www.kaggle.com/kadircandrisolu) | Cumulative Drought Stress | 79.26 | PASS | Single feature, ultra-long windows |
-| 91 | [ravi123a321at](https://www.kaggle.com/ravi123a321at) | Phenology-Weighted Stress | 64.02 | PASS | HHI concentration metric |
-| 78 | [osamurai](https://www.kaggle.com/osamurai) | - | 72.33 | PASS | - |
+| Participant | Strategy | CFCS Score | Uniqueness |
+|-------------|----------|------------|------------|
+| 🥇 [limyuxin](https://www.kaggle.com/limyuxin) | Brute Force Factor Mining | **88.82** | Systematic caching pipeline + parameter sweep across 1000+ combinations |
+| 🥈 [DragonAJA](https://www.kaggle.com/dragonaja) | Massive Feature Engineering & Optimization | **86.85** | 12 transformation methods, iterative feature refinement, CFCS-driven optimization |
+| 🥉 [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) | Deep Sweep Grid Search | **84.20** | Comprehensive parameter space exploration with stability validation |
+| [cmasch](https://www.kaggle.com/cmasch) | Agronomic Feature Engineering | 69.01 | GDD deficit, stress day counting, grain fill period masking |
+| [bluetriad](https://www.kaggle.com/bluetriad) | Climate Oscillation Integration | 76.29 | Climate technicals, cumulative sums, CFCS-aware selection |
+| [GPCH2159](https://www.kaggle.com/gpch2159) | Modular Package Structure | 74.23 | Professional code organization (incomplete - missing dependencies) |
+| [Mr RRR](https://www.kaggle.com/larrylin666) | AutoEncoder Feature Extraction | 66.33 | Only deep learning submission, neural network latent space compression |
+| [PxlPau](https://www.kaggle.com/studybeetutoring) | Signal Sharpening | 59.67 | Power law (risk²), hemispheric gating, acreage battle modeling |
+| [aaaml007](https://www.kaggle.com/aaaml007) | Production-Weighted Multi-Timescale | 100.00 | Comprehensive lag structure (7-90 days), production-weighted aggregation |
+| [cg](https://www.kaggle.com/chaitanyagarg2) | Global Production-Weighted Risk | 82.35 | Global risk hypothesis, economic weighting throughout, momentum layers |
+| [chetank99](https://www.kaggle.com/chetank99) | Relative Risk Ratios | 77.07 | Ratio signals (local/global), harvest window focus, non-linear panic modeling |
+| [ezberch](https://www.kaggle.com/ezberch) | Parallel Correlation Mining | 80.47 | Macro-climate linkage (ENSO, PDO), parallel feature scanning |
+| [ganeshstemx](https://www.kaggle.com/ganeshstemx) | Temporal Quantile Binning | 78.17 | Non-overlapping time segments, compound interactions, non-drought inverse signals |
+| [kadircandrisolu](https://www.kaggle.com/kadircandrisolu) | Ultra-Long Window Cumulative Drought | 79.26 | Extreme parsimony (single feature), 400+ day windows, cumulative tracking |
+| [ravi123a321at](https://www.kaggle.com/ravi123a321at) | Phenology-Weighted Stress | 64.02 | HHI concentration metric, growth-stage-aware weighting, biological time scales |
+| [osamurai](https://www.kaggle.com/osamurai) | - | 72.33 | - |
 
 ---
 
