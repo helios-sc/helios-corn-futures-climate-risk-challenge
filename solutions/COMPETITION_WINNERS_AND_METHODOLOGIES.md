@@ -50,18 +50,18 @@ Note: Some participants were disqualified for rule violations and have been remo
 | 🥇 1st | [limyuxin](https://www.kaggle.com/limyuxin) | Brute Force Factor Mining | **88.82** | WINNER | Grid search methodology, PCA proxy |
 | 🥈 2nd | [DragonAJA](https://www.kaggle.com/dragonaja) | Massive Feature Engineering & Optimization | **86.85** | WINNER | 12 transformation methods, CFCS-specific optimization |
 | 🥉 3rd | [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) | Deep Sweep Grid Search | **84.20** | WINNER | Systematic caching + parameter sweep |
-| - | [cmasch](https://www.kaggle.com/cmasch) | Massive Agronomic Feature Engineering | - | PASS | GDD, phenology-based |
-| - | [bluetriad](https://www.kaggle.com/bluetriad) | Technical Analysis of Climate | - | PASS | EMA, RSI-like indicators |
-| - | [GPCH](https://www.kaggle.com/gpch) | Modular Package | - | FAIL | Missing dependencies |
-| - | [Mr RRR](https://www.kaggle.com/mrrrr) | AutoEncoder Feature Extraction | - | PASS | Neural network compression |
-| - | [PxlPau](https://www.kaggle.com/pxlpau) | Signal Sharpening | - | PASS | Power law, hemispheric gating |
-| - | [aaaml007](https://www.kaggle.com/aaaml007) | Quantile Binning | - | PASS (Warning) | Exhaustive statistical binning |
-| - | [cg](https://www.kaggle.com/cg) | Production-Weighted Global Risk | - | PASS | Economic weighting |
-| - | [chetank99](https://www.kaggle.com/chetank99) | Relative Risk Ratios | - | PASS | Seasonal gating, ratio signals |
-| - | [ezberch](https://www.kaggle.com/ezberch) | Brute Force Correlation Mining | - | PASS | Macro-climate linkage |
-| - | [ganeshstemx](https://www.kaggle.com/ganeshstemx) | Quantile Binning | - | PASS | Temporal quantile bins |
-| - | [kadircandrisolu](https://www.kaggle.com/kadircandrisolu) | Cumulative Drought Stress | - | PASS | Single feature, ultra-long windows |
-| - | [ravi123a321at](https://www.kaggle.com/ravi123a321at) | Phenology-Weighted Stress | - | PASS | HHI concentration metric |
+| - | cmasch | Massive Agronomic Feature Engineering | - | PASS | GDD, phenology-based |
+| - | bluetriad | Technical Analysis of Climate | - | PASS | EMA, RSI-like indicators |
+| - | GPCH | Modular Package | - | FAIL | Missing dependencies |
+| - | Mr RRR | AutoEncoder Feature Extraction | - | PASS | Neural network compression |
+| - | PxlPau | Signal Sharpening | - | PASS | Power law, hemispheric gating |
+| - | aaaml007 | Quantile Binning | - | PASS (Warning) | Exhaustive statistical binning |
+| - | cg | Production-Weighted Global Risk | - | PASS | Economic weighting |
+| - | chetank99 | Relative Risk Ratios | - | PASS | Seasonal gating, ratio signals |
+| - | ezberch | Brute Force Correlation Mining | - | PASS | Macro-climate linkage |
+| - | ganeshstemx | Quantile Binning | - | PASS | Temporal quantile bins |
+| - | kadircandrisolu | Cumulative Drought Stress | - | PASS | Single feature, ultra-long windows |
+| - | ravi123a321at | Phenology-Weighted Stress | - | PASS | HHI concentration metric |
 
 ---
 
@@ -209,7 +209,7 @@ Pragmatic regime-dependent evaluation within country-by-month seasonal buckets t
 
 ---
 
-### 1. [cmasch](https://www.kaggle.com/cmasch)
+### 1. cmasch
 
 #### Strategy: Agronomic Feature Engineering with Dual-Mode Architecture
 
@@ -247,7 +247,7 @@ Dual-mode system supporting pure Helios data and optional external data integrat
 
 ---
 
-### 2. [bluetriad](https://www.kaggle.com/bluetriad)
+### 2. bluetriad
 
 #### Strategy: Climate Oscillation Integration with CFCS-Aware Selection
 
@@ -288,7 +288,7 @@ Builds upon external climate indices from NOAA Climate Prediction Center to capt
 
 ---
 
-### 3. [GPCH](https://www.kaggle.com/gpch)
+### 3. GPCH
 
 #### Strategy: Modular Package Structure
 
@@ -309,7 +309,7 @@ Attempted a modular code structure relying on a local `src` package for reusable
 
 ---
 
-### 4. [Mr RRR](https://www.kaggle.com/mrrrr)
+### 4. Mr RRR
 
 #### Strategy: AutoEncoder Latent Representation Learning
 
@@ -385,7 +385,7 @@ A sophisticated 5-stage pipeline using deep learning (PyTorch AutoEncoder) for n
 
 ---
 
-### 5. [PxlPau](https://www.kaggle.com/pxlpau)
+### 5. PxlPau
 
 #### Strategy: Signal Sharpening via Power Law via Power Law
 
@@ -423,7 +423,7 @@ Focuses on **"Bio-Economic Interaction"**—Climate Risk strength depends on (A)
 
 ---
 
-### 6. [aaaml007](https://www.kaggle.com/aaaml007)
+### 6. aaaml007
 
 #### Strategy: Production-Weighted Cumulative Stress with Multi-Timescale Lags
 
@@ -458,7 +458,7 @@ Builds "economically meaningful signals" by weighting climate risks by `percent_
 
 ---
 
-### 7. [cg](https://www.kaggle.com/cg)
+### 7. cg
 
 #### Strategy: Global Production-Weighted Risk Aggregation
 
@@ -497,7 +497,7 @@ Hypothesizes that global aggregate production-weighted climate risk has stronger
 
 ---
 
-### 8. [chetank99](https://www.kaggle.com/chetank99)
+### 8. chetank99
 
 #### Strategy: Relative Risk Ratios with Hemispheric Harvest Gating
 
@@ -538,7 +538,7 @@ Hypothesis: Local climate risk impact depends on **global context**—high local
 
 ---
 
-### 9. [ezberch](https://www.kaggle.com/ezberch)
+### 9. ezberch
 
 #### Strategy: Parallel Correlation Mining with Macro-Climate Indices
 
@@ -577,7 +577,7 @@ Generates massive feature combinations (aggregations, lags, transformations) and
 
 ---
 
-### 10. [ganeshstemx](https://www.kaggle.com/ganeshstemx)
+### 10. ganeshstemx
 
 #### Strategy: Non-Overlapping Temporal Quantile Binning
 
@@ -629,7 +629,7 @@ Segments the full time series into non-overlapping temporal bins (tertiles, quar
 
 ---
 
-### 11. [kadircandrisolu](https://www.kaggle.com/kadircandrisolu)
+### 11. kadircandrisolu
 
 #### Strategy: Ultra-Long Window Cumulative Drought Tracking
 
@@ -669,7 +669,7 @@ Focuses on long-term pattern detection using extended rolling windows [400,410,4
 
 ---
 
-### 12. [ravi123a321at](https://www.kaggle.com/ravi123a321at)
+### 12. ravi123a321at
 
 #### Strategy: Phenology-Weighted Stress with Spatial Concentration
 
