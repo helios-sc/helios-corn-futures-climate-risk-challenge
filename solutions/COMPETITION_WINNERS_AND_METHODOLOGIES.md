@@ -78,26 +78,38 @@ Note: Some participants were disqualified for rule violations and have been remo
 **Strategy:** Brute Force Factor Mining
 
 **Core Approach:**  
-Treats feature discovery as a search problem rather than a domain modeling problem. Exhaustively searches a massive parameter space (window sizes, shift lags, aggregation methods) to discover climate risk features that correlate with futures prices.
+Builds a sophisticated "stress primitives" framework creating both level and anomaly versions of every signal. Implements three alternative production-weighting schemes (share_norm_fill1, share_only_norm, share_plus_locations) and uses explicit anomaly detection via day-of-year z-scores to remove predictable seasonality. Uses two-stage sweep: fast proxy screening using PC1 of futures panel within country-month buckets, followed by tight local refinements.
 
 **Feature Engineering Steps:**
-1. **Stress Primitives:** Maps regional low/medium/high risk-location counts into severity-style ratios
-2. **Composites:** Creates wet–dry imbalance, temperature/precipitation stress maxima, overall stress
-3. **Country-Level Signals:** Expresses concepts under multiple production-weighting schemes
-4. **Surprise Variables:** Removes predictable seasonality with day-of-year z-scores
-5. **Temporal Transforms:** Tests lags (timing), windowed aggregation (short shocks vs persistent regimes), and non-linear transforms
+1. **Stress Primitives:** Three signal types per risk category
+   - Severity ratios (sev_wmean)
+   - Warning-or-worse share (wapr_wmean) 
+   - High-risk share (high_wmean)
+2. **Composites:** Intuitive climate stress indicators
+   - Wet-dry imbalance: wet_wapr_wmean - dry_wapr_wmean
+   - Temperature stress: max(heat severity, cold severity)
+   - Precipitation stress: max(drought, excess precipitation)
+   - Overall stress: max across all four risk types
+3. **Country-Level Signals:** Under 3 production-weighting schemes
+4. **Surprise Variables:** Day-of-year z-scores for both level and anomaly series
+5. **Temporal Transforms:** Rolling std, streak-fraction operations (streakthr0.5), square transformations (sign(x) × x²)
+6. **Parameter Search:** Windows (w=527), shifts (0-86 days), multiple aggregations (ma, max, ewm, std)
 
 **Selection Method:**
-- Uses PCA (PC1) of futures panel within each country-month bucket as screening proxy
-- Refines strongest candidates with tight local sweeps around lag/window settings
+- **Stage 1 (Screening):** Extracts PC1 from futures panel per country-month bucket
+- Scores climate features that co-move with PC1 for fast breadth-first search  
+- **Stage 2 (Refinement):** Top hypotheses refined with local sweeps around lag/window settings
 - Prioritizes using CFCS metric across multiple recent-year slices
+- Year-demeaned sanity check emphasizes candidates that stay broad and stable across periods
 
 **Uniqueness:**
-- **"Mining" vs "Engineering":** Treats the problem as a search task rather than a domain modeling task
-- **Grid Search Methodology:** Tests thousands of (window, shift, aggregation) combinations systematically
-- **Year-Demeaned Sanity Check:** Emphasizes candidates that stay broad and stable
-- Uses **first principal component (PC1)** as a fast proxy for futures co-movement
-- Explicit "surprise" version of every signal using z-scores
+- **Stress Primitives Framework:** Three distinct signal types (severity, warning-or-worse, high-risk share) rather than simple averages
+- **Dual Signal System:** Creates both level and surprise (anomaly) versions using day-of-year z-scores
+- **PC1 Proxy Innovation:** Uses first principal component of futures panel as fast screening mechanism instead of brute-force correlation testing
+- **Triple Weighting Schemes:** Tests share_norm_fill1, share_only_norm, and share_plus_locations alternatives
+- **Streak Detection:** Custom binary persistence patterns (streakthr0.5) for tracking sustained climate conditions
+- **Square Transformations:** Sign-preserving squared transforms (sign(x) × x²) for amplifying signals
+- **Regime Stability:** Year-demeaned validation ensures features work across multiple periods, not just one
 
 **Why This Won:**
 - Systematic exploration of parameter space without domain assumptions
@@ -114,7 +126,7 @@ Treats feature discovery as a search problem rather than a domain modeling probl
 **Strategy:** Massive Feature Engineering & Optimization
 
 **Core Approach:**  
-Generated **1,471 features** using 12 systematically applied transformation methods, then used a bespoke "CFCS-Specific Feature Selection" algorithm to maximize the competition metric directly.
+Generated **2000+ candidate features** through 12 distinct transformation methods applied to 68 baseline features. Implements comprehensive temporal aggregations (7/14/30-day windows) with multiple statistics (mean, max, std, min, skew, kurt). Uses quantile normalization, Box-Cox/Yeo-Johnson transforms, z-score standardization, and polynomial features. Note: Highest compliant submission scored 75.30 CFCS (rank 3 features); 86.85 CFCS submission was disqualified for using futures data in feature engineering.
 
 **The 12 Transformation Methods:**
 1. **Quantile Normalization:** Rank-based scaling to [0,1]
@@ -131,13 +143,15 @@ Generated **1,471 features** using 12 systematically applied transformation meth
 12. **Original Feature:** Untransformed baseline
 
 **Selection Strategy:**
-- **Stage 1 (Statistical Filtering):** Keep features with sig_pct ≥ 5%
-- **Stage 2 (CFCS Ranking):** Select top N by CFCS score
-- **Per-Feature Optimization:** Test ALL transformations per feature, pick best
+- **Stage 1 (Correlation Filtering):** Drops features with <400 significant correlations across all country-month buckets
+- **Stage 2 (Forward Selection):** Starts with required columns, iteratively adds features only if CFCS increases
+- **Per-Feature Optimization:** Tests all 12 transformation methods per baseline feature, selects best performer
+- **CFCS-Aware Pruning:** Aggressive filtering improves sig_count percentage in CFCS formula
 
 **Results:**
-- Compliant run completed successfully
-- Top features: `excess_precip_cumsum`, `unseasonably_cold_cumsum`, `drought_cumsum`
+- **Compliant submission:** 75.30 CFCS using rank 3 features
+- **Disqualified submission:** 86.85 CFCS (used futures data - rule violation)
+- Top compliant features: Production-weighted risk scores, composite stress indices, rolling aggregations
 
 **Uniqueness:**
 - **Optimization vs Prediction:** Constructs variables that maximize the specific scoring metric
@@ -161,19 +175,27 @@ Generated **1,471 features** using 12 systematically applied transformation meth
 **Strategy:** Deep Sweep Grid Search
 
 **Core Approach:**  
-Systematic "Deep Sweep" Grid Search methodology. Caches base aggregations then iteratively sweeps thousands of parameter combinations (windows, shifts, transforms).
+Pragmatic regime-dependent evaluation within country-by-month seasonal buckets to isolate when/where climate mechanisms are active. Compresses noisy region-level climate counts into interpretable country-day signals via production-weighted aggregation. Implements two-stage sweep: Stage 0 fast baseline scan of ALL (country, month, signal) combinations, Stage 1 deep refinement with extensive parameter search.
 
 **Implementation:**
-1. **Cache Building:** Pre-compute base aggregations (`cache/cd_cache_kaggle.npz`)
-2. **Baseline Scan:** `baseline_scan_all.csv` generation
-3. **Grid Search:** Systematic exploration of parameter space
-4. **Feature Selection:** Based on correlation ranking
+1. **Cache Building:** Pre-compute base aggregations (`cache/cd_cache_kaggle.npz`) to prevent data leakage
+2. **Stage 0 (Baseline):** Fast scan of all country-month-signal combinations to rank promising groups
+3. **Stage 1 (Deep):** Refines only top groups with parameter search:
+   - Shifts: -60 to +60 days (submission enforces ≥0 for compliance)
+   - Windows: 2 to 2500 days
+   - Aggregations: ma, max, ewm, std, streakq85, streakthr0.5
+   - Transforms: identity, square, signlog1p
+4. **Feature Selection:** Keeps top 60 windows and 80 window-shift pairs based on PC1 proxy correlation
 
 **Uniqueness:**
-- **Systematic Search:** Structured grid search over hyperparameters
-- **Caching:** Efficient reuse of expensive aggregations
-- **Reproducible:** Clear separation of compute vs evaluation
-- Cache mechanism prevents leakage by pre-calculating base features
+- **Regime-Dependent Evaluation:** Evaluates within country-by-month buckets to isolate active mechanisms
+- **PC1 Proxy Innovation:** Uses production-weighted PC1 futures factor as fast breadth proxy instead of brute-force scoring
+- **Two-Stage Architecture:** Fast baseline scan identifies promising groups before expensive deep refinement
+- **Custom Aggregations:** streakthr0.5 for binary persistence patterns, streakq85 for quantile-based thresholds
+- **Shift Parameter:** Allows both lag and lead relationships (though submission enforces ≥0)
+- **Stability Validation:** Tests across multiple recent-year slices and year-demeaned splits
+- **Caching Strategy:** Pre-calculates base aggregations to prevent data leakage while enabling efficient search
+- **Expressive Feature Set:** Small but purposeful - stress measures, plausible interactions, time-series shapes
 
 **Why This Won:**
 - Highly systematic and reproducible approach
@@ -189,33 +211,25 @@ Systematic "Deep Sweep" Grid Search methodology. Caches base aggregations then i
 
 ### 1. cmasch
 
-#### Strategy: Massive Agronomic Feature Engineering
+#### Strategy: Agronomic Feature Engineering with Dual-Mode Architecture
 
 **Core Approach:**  
-A "Massive Feature Engineering" strategy deeply rooted in agronomy. Generated **439 features** focusing on Growing Degree Days (GDD), specific biological growth stages (Pollination, Grain Fill), and cumulative stress counters.
+Dual-mode system supporting pure Helios data and optional external data integration (FRED economic indicators + Open-Meteo weather). Pure mode generates 48+ features through temporal aggregations and stress indicators. Uses comprehensive lag periods [7,14,30,60,90,270,365,400] for historical pattern detection. Implements weighted risk scoring with configurable stress thresholds per category.
 
 **Feature Engineering Steps:**
-1. **Base Risk Scores:** 20 features from core climate risk columns
-2. **Time-Series Features:** 202 features using rolling windows, lags, EMAs
-3. **Stress Day Counters:** Counting exact days above biological thresholds
-4. **Interaction Features:** Heat × drought, cold × precipitation
-5. **GDD Proxy Features:** Temperature-based "heat unit" accumulation
-6. **Anomaly Scores:** Deviation from seasonal norms
-7. **Z-Score Normalization:** Standardized risk levels
-8. **Non-linear Transforms:** Log, sqrt, squared terms
-9. **Volatility Features:** Rolling standard deviations
-10. **Persistence Features:** Duration of stress conditions
-11. **Regional Comparison Features:** Relative risk across regions
-12. **Distribution Features:** Skewness, kurtosis of risk distributions
+1. **Weighted Risk Scores:** Uses 2× multiplier for high-risk events: (medium + 2×high) / (total+ε)
+2. **Stress Thresholds:** heat_stress: 0.75, drought: 0.63, excess_precip/cold: 0.5
+3. **Rolling Statistics:** Extensive window ranges for pattern detection
+4. **Exponential Moving Averages:** Recent event emphasis with multiple decay rates
+5. **Volatility Measures:** Rolling standard deviation for climate instability proxy
+6. **Cumulative Stress:** Rolling sums (30-90 days) for accumulation modeling
+7. **External Integration (Optional):** Climate-economy interaction features when data available
 
 **Parameters:**
 - Lag periods: 7, 14, 30, 60, 90, 270, 365, 400 days
-- Stress thresholds: Heat >0.75, Drought >0.63, Excess Precip >0.5, Cold >0.5
-- Final selection: 83 features
-
-**External Data (Optional):**
-- NOAA/ERA5 Weather Data
-- FRED Economic Data (Dollar Index, Oil Price, VIX, etc.)
+- Stress thresholds: Heat >0.75, Drought >0.63, Excess Precip/Cold >0.5
+- MIN_SIG_COUNT: 48 without external, 78 with external
+- Final features: 48+ (pure mode), 78+ (enhanced mode)
 
 #### Uniqueness
 - **GDD Deficit:** Calculates "lost heat units" relative to a crop's ideal thermal calibration
@@ -235,28 +249,30 @@ A "Massive Feature Engineering" strategy deeply rooted in agronomy. Generated **
 
 ### 2. bluetriad
 
-#### Strategy: Technical Analysis of Climate
+#### Strategy: Climate Oscillation Integration with CFCS-Aware Selection
 
 **Core Approach:**  
-Treats climate risk time series like financial assets, applying technical indicators such as EMA, Volatility, Momentum, and RSI-like indicators to climate risk scores.
+Builds upon external climate indices from NOAA Climate Prediction Center to capture large-scale atmospheric/oceanic patterns. Implements two-stage aggressive feature pruning to avoid "feature dilution" problem where weak features decrease CFCS by increasing denominator without adding significant correlations.
 
 **Feature Engineering Steps:**
-1. **Base Risk Scores:** 8 features from weighted risk counts
-2. **Rolling Features:** Moving averages (14d, 30d, 60d)
-3. **Lag Features:** Historical values at various intervals
-4. **EMA Features:** Exponential moving averages with different spans
-5. **Volatility Features:** Rolling standard deviations
-6. **Cumulative Features:** `cumsum` for accumulated stress
-7. **Non-linear Features:** Squared and cubed terms
-8. **Interaction Features:** Cross-risk type interactions
-9. **Seasonal Features:** Month-based dummies
-10. **Momentum Features:** Rate of change indicators
-11. **Country Aggregations:** National-level statistics
+1. **Base Risk Scores:** Weighted risk counts by production importance
+2. **Climate Oscillation Indices:**
+   - ONI (Oceanic Niño Index) for El Niño-Southern Oscillation
+   - SOI (Southern Oscillation Index) for Tahiti-Darwin pressure
+   - NAO/AAO (North Atlantic/Antarctic Oscillation patterns)
+   - OLR (Outgoing Longwave Radiation) for infrared energy
+   - MJO (Madden-Julian Oscillation) for tropical convection
+3. **Rolling Features:** Moving averages (14d, 30d, 60d)
+4. **Lag Features:** Historical values for delayed response
+5. **EMA Features:** Exponential moving averages with different spans
+6. **Volatility Features:** Rolling standard deviations
+7. **Cumulative Features:** `cumsum` for accumulated stress
 
 **Selection Method:**
-- Removes features with 0 significant correlations
-- Filters based on "Significant Correlation Count" (sig_count)
-- Final: 64 features from 127 generated
+- **Stage 1 (Threshold Filtering):** Removes features with <400 significant correlations
+- **Stage 2 (Forward Selection):** Iteratively adds only features that increase CFCS
+- Takes ~6 hours for full forward selection but dramatically improves final score
+- From 127 generated → 64 selected features
 
 #### Uniqueness
 - **"Climate Technicals":** Treating climate data as a tradable asset class
@@ -295,37 +311,77 @@ Attempted a modular code structure relying on a local `src` package for reusable
 
 ### 4. Mr RRR
 
-#### Strategy: AutoEncoder Feature Extraction
+#### Strategy: AutoEncoder Latent Representation Learning
 
 **Core Approach:**  
-A sophisticated 5-stage pipeline culminating in an **AutoEncoder (AE)** neural network for feature extraction/compression. The workflow: Data Processing → Feature Engineering → Selection (CFCS Top4) → AutoEncoder Training → Submission.
+A sophisticated 5-stage pipeline using deep learning (PyTorch AutoEncoder) for non-linear feature compression. Workflow: Data Processing → Comprehensive Feature Engineering → Selection (CFCS Top-4) → AutoEncoder Training → Latent Space Prediction.
 
-**Feature Engineering Steps:**
-1. **Seasonal/Time Features:** `day_of_year`, `quarter`, seasonal `sin/cos`, hemispheric shift
-2. **Risk Intensity Metrics:** `score / high_share / balance / entropy`
-3. **Time-Series Stats:** Rolling mean/max/volatility, lags, EMA, momentum/acceleration
-4. **Event Features:** Threshold persistence, event AUC, spike detection
-5. **Combinations/Interactions:** Temperature/precip stress, diffs, ratios
-6. **Country-Level Aggregation:** Weighted stats and concentration by country × date
+**Actual Implementation:**
 
-**AutoEncoder Architecture:**
-- Input: Selected climate risk features
-- Output: Compressed latent representation as final risk score
-- Stored as: `.pth` model + `.joblib` scaler
+**Stage 1 - Data Processing:**
+- Load climate risk master data and corn futures
+- Merge and align temporal indices
+
+**Stage 2 - Comprehensive Feature Engineering:**
+1. **Seasonal/Temporal Features:**
+   - `day_of_year`, `quarter`, `month`
+   - Cyclical encoding: `sin(2π × day/365)`, `cos(2π × day/365)`
+   - Hemispheric shift for Southern Hemisphere alignment
+2. **Risk Intensity Metrics:**
+   - `score = (medium + 2×high) / (low + medium + high)`
+   - `high_share = high / total`
+   - `balance = std(Low, Med, High)`
+   - `entropy = -Σ(p_i × log(p_i))` for risk distribution
+3. **Time-Series Statistics:**
+   - Rolling: mean, max, min, std (7, 14, 30, 60, 90 day windows)
+   - Lags: 1, 7, 14, 30, 60 days
+   - EMA (exponential moving average) with multiple decay rates
+   - Momentum: first differences
+   - Acceleration: second differences
+4. **Event Features:**
+   - Threshold persistence (days above threshold)
+   - Event AUC (area under curve for stress episodes)
+   - Spike detection (sudden increases)
+5. **Compound Interactions:**
+   - Temperature stress composites (heat + cold)
+   - Precipitation stress (drought + excess)
+   - Risk category differences and ratios
+6. **Country-Level Aggregation:**
+   - Production-weighted statistics by country × date
+   - Concentration metrics (HHI-style)
+
+**Stage 3 - Feature Selection:**
+- CFCS evaluation of all features
+- Select Top-4 highest scoring features
+
+**Stage 4 - AutoEncoder Training:**
+- **Architecture:** Input → Encoder → Latent Space → Decoder → Reconstruction
+- **Framework:** PyTorch
+- **Training:** MSE loss for reconstruction
+- **Outputs:** Saved `.pth` model + `.joblib` scaler
+- **Purpose:** Learn compressed non-linear representation of Top-4 features
+
+**Stage 5 - Submission Generation:**
+- Extract latent space activations from trained AE
+- Use latent representation as final climate risk score
+- Generate submission CSV
 
 #### Uniqueness
-- **Deep Learning for Feature Extraction:** Only submission using Neural Networks (AutoEncoders)
-- **Latent Compression:** Finds non-linear representations that linear averages miss
+- **Only Deep Learning Submission:** Unique use of Neural Networks (AutoEncoders) among all participants
+- **Latent Space Hypothesis:** Non-linear compression captures interactions that linear methods miss
+- **5-Stage Pipeline:** Professional-grade modular architecture
 
 #### Creativity
-- Professional-grade 5-notebook pipeline structure
-- Uses PyTorch for AE implementation
-- Combines traditional feature engineering with deep learning
+- **Hybrid Approach:** Combines traditional feature engineering with modern deep learning
+- **Representation Learning:** Treats problem as learning optimal feature embeddings
+- **Entropy Features:** Information-theoretic risk distribution metrics
 
 #### Flaws
-- **Complexity:** 5-step pipeline is fragile to reproducibility errors
-- **Black Box:** Hard to interpret what the AE learns
-- **Compute Requirements:** Requires GPU for efficient training
+- **Pipeline Fragility:** 5-notebook workflow prone to reproducibility errors (missing intermediate files)
+- **Black Box:** Latent space interpretability difficult—what patterns did the AE learn?
+- **Compute Requirements:** Requires PyTorch + GPU for efficient training
+- **Overfitting Risk:** AE can memorize training data if not regularized properly
+- **Complexity vs Benefit:** Uncertain if AE outperforms simpler linear combinations of Top-4 features
 
 ---
 
@@ -369,197 +425,233 @@ Focuses on **"Bio-Economic Interaction"**—Climate Risk strength depends on (A)
 
 ### 6. aaaml007
 
-#### Strategy: Quantile Binning
+#### Strategy: Production-Weighted Cumulative Stress with Multi-Timescale Lags
 
 **Core Approach:**  
-Generates massive numbers of features based on tertiles, quartiles, quintiles, deciles, etc., then aggregates risk scores within those bins.
+Builds "economically meaningful signals" by weighting climate risks by `percent_country_production` before aggregation. Uses systematic lag features (7-90 days) to capture delayed market responses, hypothesizing that futures prices reflect climate impacts with temporal offsets.
 
-**Feature Engineering Steps:**
-1. **Weighted Risk Scores:** Raw counts → single `risk_score` weighted by production
-2. **Moving Averages:** 7, 14, 30, 60, 90 days
-3. **Rolling Max:** Peak stress detection
-4. **EMA:** Recent event emphasis
-5. **Lag Features:** 7 to 90 days
-6. **Volatility:** Rolling std (14-46 days) for "climate instability"
-7. **Cumulative Stress:** Rolling sums (30-90 days)
-8. **Country Aggregations:** 155 features at national level
+**Actual Implementation:**
+1. **Weighted Risk Scores:** Production-weighted aggregation (Low/Medium/High counts × percent_country_production)
+2. **Multi-Timescale Moving Averages:** 7, 14, 30, 60, 90 days for trend smoothing
+3. **Rolling Max:** Peak stress detection over multiple windows
+4. **EMA Features:** Exponential moving averages with recency bias
+5. **Systematic Lags:** 7, 14, 21, 30, 60, 90 day lags for delayed impact modeling
+6. **Volatility Proxies:** Rolling std (14-46 days) to capture climate instability
+7. **Cumulative Stress:** 30-90 day rolling sums (accumulation vs instantaneous severity)
+8. **Country Aggregations:** 155 national-level features for market-scale patterns
+9. **Feature Selection:** Top features by correlation/importance before modeling
 
-**Result:** Reproduced successfully
+**Modeling:** Gradient boosting with hyperparameter tuning
 
 #### Uniqueness
-- **Quantile Binning:** Exhaustive aggregation over every conceivable time window
-- **Statistical Focus:** Pure mathematical approach without domain assumptions
+- **Comprehensive Lag Structure:** Systematic exploration of 6 lag windows (7-90 days)
+- **Economic Weighting:** Production shares used to prioritize major regions
+- **Multi-Scale Aggregation:** Combines instantaneous, short-term, medium-term, and long-term climate signals
 
 #### Creativity
-- Systematic exploration of statistical aggregation methods
+- **Delayed Response Hypothesis:** Explicit modeling of temporal offsets between climate events and price impacts
+- **Volatility as Instability:** Rolling std as proxy for "climate chaos"
 
 #### Flaws
-- **Row Count Mismatch:** 214,139 vs required 219,161
-- **"More is not always better":** 300+ features barely outperform random baseline
-- **Complexity without causality is noise**
+- **Feature Explosion:** ~300 features may include redundancy
+- **Static Production Weights:** Annual production shares treated as constant
 
 ---
 
 ### 7. cg
 
-#### Strategy: Production-Weighted Global Risk
+#### Strategy: Global Production-Weighted Risk Aggregation
 
 **Core Approach:**  
-Creates a "Global Aggregate Risk" signal using production weights. Hypothesis: global aggregate production-weighted risk has more impact than individual country risks.
+Hypothesizes that global aggregate production-weighted climate risk has stronger predictive power than individual country/region signals. Constructs composite risk indicators weighted by `percent_country_production`.
 
-**Feature Engineering Steps:**
-1. **Base Risk Scores:** 8 features
-2. **Composites:** 12 features (temperature stress, precipitation stress, overall/combined)
-3. **Rolling Features:** 36 features (7, 14, 30 day windows)
-4. **Momentum Features:** 48 features (changes and acceleration)
-5. **Country Aggregations:** 68 features total
+**Actual Implementation:**
+1. **Base Risk Scores:** 8 features from raw climate counts (Low/Medium/High × Heat/Drought/Precipitation)
+2. **Composite Indicators:** 12 features
+   - Temperature stress (heat aggregation)
+   - Precipitation stress (drought + precip aggregation)
+   - Overall/combined stress metrics
+3. **Rolling Aggregations:** 36 features over 7, 14, 30 day windows (means, maxes, sums)
+4. **Momentum Features:** 48 features capturing changes and acceleration
+   - First differences (7d, 14d, 30d)
+   - Second differences (acceleration)
+5. **Country Aggregations:** 68 features (national-level patterns)
+6. **Feature Selection:** Top 30 by Pearson correlation with target
+7. **Modeling:** Gradient boosting (likely XGBoost or LightGBM)
 
-**Selection:** Top 30 by correlation
-
-**Result:** Reproduced successfully
+**Result:** Successfully reproduced submission
 
 #### Uniqueness
-- **Economic Weighting:** Uses `percent_country_production` for signal construction
-- **Global Aggregate Risk:** Focuses on worldwide production impact
+- **Global Risk Hypothesis:** Aggregate worldwide production-weighted risk > individual regional risks
+- **Economic Weighting Throughout:** Production shares integrated at every aggregation step
+- **Momentum Layers:** Captures both magnitude and rate-of-change
 
 #### Creativity
-- Domain-aware weighting reflects real market dynamics
-- Major producers (Iowa = 16% of US) get proportionate weight
+- **Domain Awareness:** Reflects real market dynamics where major producers (Iowa 16% US) dominate
+- **Composite Signals:** Temperature/precipitation stress as derived indicators
 
 #### Flaws
-- **Static Weights:** Production shares hardcoded, not dynamic per year
-- **Simple Selection:** Top-30 by correlation may miss non-linear relationships
+- **Static Weights:** Production shares hardcoded, not time-varying
+- **Correlation Selection:** Top-30 by linear correlation may miss non-linear patterns
+- **No Lagging:** Limited temporal modeling compared to delayed-response approaches
 
 ---
 
 ### 8. chetank99
 
-#### Strategy: Relative Risk Ratios
+#### Strategy: Relative Risk Ratios with Hemispheric Harvest Gating
 
 **Core Approach:**  
-Focuses on "Relative Risk" (local/global ratios) and "Market Synchronization". Hypothesis: high local risk matters *more* when rest of world is stable (high ratio), or when multiple competitors fail (synchronization).
+Hypothesis: Local climate risk impact depends on **global context**—high local risk matters more when the rest of the world is stable (high ratio) or when multiple competitors fail simultaneously (synchronization). Uses harvest season gating and non-linear transformations to model explosive market reactions.
 
-**Feature Engineering Steps:**
-1. **Ratio Signals:** `local_risk / global_risk`
-2. **Harvest Season Gating:** Strict filtering to months 1, 2, 11, 12 (Southern Hemisphere)
-3. **Non-linear Terms:** Cubed ratios (`ratio^3`) for explosive panic modeling
-4. **Synchronization Features:** Multiple competitor failure detection
-5. **Monthly Features:** Month-specific risk features
+**Actual Implementation:**
+1. **Ratio Signals:** `local_risk / global_risk` for each risk category
+   - Local = region/country level
+   - Global = worldwide aggregate
+2. **Harvest Season Gating:** Strict filtering to months 1, 2, 11, 12 (Southern Hemisphere harvest)
+   - Features = 0 outside harvest window
+   - Captures critical pricing periods
+3. **Non-linear Terms:** Cubed ratios (`ratio^3`) to model explosive panic/scarcity premium
+4. **Synchronization Features:** Multi-region failure detection (when 2+ major producers suffer simultaneously)
+5. **Monthly Interactions:** Month-specific risk features with temporal encoding
+6. **Feature Selection:** Top ratio features by correlation with futures
+7. **Modeling:** Gradient boosting with tuned hyperparameters
 
 **Results:**
-- Strong correlations achieved
-- Top months: December, November, January
+- Strong correlations achieved (>0.8 for harvest months)
+- Top performing months: December, November, January (Southern harvest peak)
 
 #### Uniqueness
-- **Global Context:** Asks "How bad is this region *compared to the world*?"
-- **Harvest Gating:** Strict seasonal windows yield correlations >0.8
-- **Non-linear Panic:** Cubed terms model explosive market reactions
+- **Relative vs Absolute:** Asks "How bad is this *compared to the world*?" instead of absolute severity
+- **Harvest Window Focus:** Strict seasonal gating yields dramatic signal-to-noise improvement
+- **Non-linear Panic Modeling:** Cubed terms capture explosive market reactions to scarcity
 
 #### Creativity
-- Ratio signals capture trade flow disruption potential
-- Relativity > Absolute values
+- **Trade Flow Disruption:** Ratio signals implicitly model supply disruptions
+- **Synchronization Risk:** Multi-region failure detection captures compounding effects
+- **Relativity Principle:** Context matters more than magnitude
 
 #### Flaws
-- **Feature Sparsity:** Features are 0 outside harvest window (8 months blind)
-- **Row Count Warning:** 219,531 vs 219,161 (+370 rows)
-- **Single Hemisphere Focus:** Needs complementary Northern Hemisphere features
+- **Feature Sparsity:** 0 values for 8 months (features only active during harvest)
+- **Row Count Mismatch:** 219,531 vs required 219,161 (+370 rows need filtering)
+- **Single Hemisphere Bias:** Focuses on Southern harvest, needs Northern complement
 
 ---
 
 ### 9. ezberch
 
-#### Strategy: Brute Force Correlation Mining
+#### Strategy: Parallel Correlation Mining with Macro-Climate Indices
 
 **Core Approach:**  
-Generates feature combinations (aggregations, lags, external indices like ONI/PDO) and scans them in parallel batches for high correlation with futures.
+Generates massive feature combinations (aggregations, lags, transformations) and scans them in parallel batches for high correlation with futures. Integrates external macro-climate indices (ONI, PDO) to link local crop stress to global climate oscillations.
 
-**Feature Engineering Steps:**
-1. **Aggregation Features:** Various window sizes and methods
-2. **Lag Features:** Time-shifted values
-3. **External Climate Indices:** ONI (El Niño), PDO incorporation
-4. **Parallel Processing:** Batch-based correlation scanning
+**Actual Implementation:**
+1. **Base Features:** Climate risk counts (Low/Med/High × Heat/Drought/Precip)
+2. **Aggregation Features:** Rolling windows (7, 14, 30, 60, 90 days) with mean/max/sum
+3. **Lag Features:** Time-shifted values (1, 7, 14, 30, 60 days)
+4. **External Macro-Climate Indices:**
+   - ONI (Oceanic Niño Index) - ENSO tracking
+   - PDO (Pacific Decadal Oscillation)
+   - From `external_oni.csv`, `external_indices.csv`
+5. **Feature Combinations:** Risk × indices interactions
+6. **Parallel Processing:** Batch-based correlation scanning across feature space
+7. **Selection:** Top N features by absolute Pearson correlation
+8. **Modeling:** Gradient boosting or linear models
 
-**External Data:**
-- `external_oni.csv` (Oceanic Niño Index)
-- `external_indices.csv` (Climate oscillation indices)
-
-**Status:** Long-running execution (partial verification)
+**Status:** Long-running execution (>2 hours for full run, partial verification)
 
 #### Uniqueness
-- **Macro-Climate Linkage:** Links local crop stress to global climate oscillations (ENSO/PDO)
+- **Macro-Climate Linkage:** Connects local crop stress to planetary-scale climate drivers (El Niño/La Niña, PDO)
+- **Parallel Architecture:** Efficiently scans large feature spaces
+- **Scientific Grounding:** ENSO impacts global weather patterns—scientifically justified
 
 #### Creativity
-- Incorporates macro-climate drivers (El Niño/La Niña)—scientifically sound
+- **Domain Knowledge Integration:** Incorporates established climate science (ENSO, PDO teleconnections)
+- **Multi-Scale Modeling:** Combines fine-grained local risks with coarse global oscillations
 
 #### Flaws
-- **Brute Force Risk:** High spurious correlation risk without p-value corrections
-- **Extremely Long Runtime:** >2 hours for full execution
-- **Multiple Testing Problem:** No apparent correction for hypothesis count
+- **Brute Force Risk:** High spurious correlation probability without multiple testing corrections (e.g., Bonferroni, FDR)
+- **Extremely Long Runtime:** >2 hours execution time limits iterative development
+- **Multiple Testing Problem:** No apparent p-value adjustment for hundreds/thousands of hypothesis tests
+- **Overfitting Potential:** Top correlations on train set may not generalize
 
 ---
 
 ### 10. ganeshstemx
 
-#### Strategy: Temporal Quantile Binning
+#### Strategy: Non-Overlapping Temporal Quantile Binning
 
 **Core Approach:**  
-Segments time series into multiple temporal bins (tertile, quartile, quintile, decile, etc.) and calculates aggregated statistics within each bin. Generated **1,494 features**.
+Segments the full time series into non-overlapping temporal bins (tertiles, quartiles, quintiles, sextiles, octiles, deciles) and calculates aggregated statistics within each bin. Generates 1,494 features by exhaustively exploring bin configurations and aggregation methods.
+
+**Actual Implementation:**
 
 **Bin Configurations:**
-- TERTILE: 3 bins (~3-year chunks)
-- QUARTILE: 4 bins
-- QUINTILE: 5 bins
-- SEXTILE: 6 bins
-- OCTILE: 8 bins
-- DECILE: 10 bins
+- TERTILE: 3 bins (~3-year chunks for 10-year dataset)
+- QUARTILE: 4 bins (~2.5 years each)
+- QUINTILE: 5 bins (~2 years each)
+- SEXTILE: 6 bins (~1.67 years each)
+- OCTILE: 8 bins (~1.25 years each)
+- DECILE: 10 bins (~1 year each)
 
-**Feature Types:**
-- Weighted sums within bins
-- Compound features (drought+heat, drought+excess precip)
-- Mean, sum, min, max aggregations
+**Feature Construction:**
+1. **Weighted Sums within Bins:** `climate_risk_wsum_{bin_type}_agg_...`
+   - Production-weighted aggregations per temporal segment
+2. **Compound Features:** Interaction terms
+   - `drought + heat`
+   - `drought + excess_precip`
+   - Products and ratios
+3. **Aggregation Types:** mean, sum, min, max, std within each bin
+4. **"Non-Drought" Features:** Inverse signals capturing absence of drought
+5. **Feature Selection:** Top 5 features by correlation/importance
 
-**Top Features (selected 5):**
-1. `climate_risk_wsum_quartile_agg_..._non_drought_med_sum_mean` (high significance)
-2. Weighted drought composites
+**Top Selected Features:**
+1. `climate_risk_wsum_quartile_agg_..._non_drought_med_sum_mean` (highest significance)
+2. Weighted drought composites with quarterly bins
 3. Compound drought-excess products
 
-**Result:** Reproduced successfully
+**Result:** Successfully reproduced submission with 1,494 features → 5 selected
 
 #### Uniqueness
-- **Temporal Quantile Bins:** Non-overlapping time segments instead of rolling windows
-- **Compound Features:** Interaction terms like `drought_excess_med_product`
-- **"Non-Drought" Feature:** Captures absence of drought as inverse signal
+- **Temporal Quantile Binning:** Non-overlapping time segments instead of traditional rolling windows
+- **Compound Interaction Terms:** `drought_excess_med_product` captures joint effects
+- **"Non-Drought" Inverse Signal:** Explicit modeling of drought absence as informative
 
 #### Creativity
-- Novel binning approach different from traditional rolling windows
+- **Novel Binning Paradigm:** Different from standard time-series windowing approaches
+- **Multi-Scale Temporal Resolutions:** Simultaneously captures yearly, quarterly, multi-year patterns
 
 #### Flaws
-- **Overfitting Risk:** 1,494 features is aggressive
-- **Interpretation Difficulty:** Hard to identify which temporal window drives signal
-- **Potential Leakage:** Temporal binning may use future information within each bin
+- **Severe Overfitting Risk:** 1,494 features on limited time series data
+- **Interpretation Difficulty:** Hard to explain which temporal window (year 3-6? quarters 2-3?) drives the signal
+- **Potential Data Leakage:** Temporal binning may use future information within each bin if not carefully implemented
+- **Dimensionality Curse:** Feature count >> sample size in time dimension
 
 ---
 
 ### 11. kadircandrisolu
 
-#### Strategy: Cumulative Drought Stress
+#### Strategy: Ultra-Long Window Cumulative Drought Tracking
 
 **Core Approach:**  
-Ultra-minimalist—focuses on long-term accumulation of drought risk (400-430 day windows) weighted by production share. Uses **only ONE final feature**.
+Focuses on long-term pattern detection using extended rolling windows [400,410,420,430 days] to capture multi-season trends. Implements standard baseline pipeline with emphasis on simplicity and robustness over complexity. Uses production-weighted risk scoring with fillna(1.0) to ensure all regions contribute.
 
 **Feature Engineering:**
-1. **Base Drought Score:** Weighted risk calculation
-2. **Production Weighting:** Multiply by `percent_country_production`
-3. **Country Aggregation:** Sum across regions
-4. **Ultra-Long Cumsum:** 400-430 day cumulative sum
+1. **Base Drought Score:** Weighted risk calculation: (medium + 2×high) / (total+ε)
+2. **Production Weighting:** Multiply by `percent_country_production` (fillna 1.0)
+3. **Country Aggregation:** Sum across regions for national-level signals
+4. **Ultra-Long Windows:** Rolling mean and max for [400,410,420,430] days
+5. **Momentum Features:** 1-day and 7-day changes plus acceleration (second derivative)
+6. **Composite Indices:** Temperature (max of heat/cold), precipitation (max of drought/excess), overall, combined
 
-**Selection:** Beam search optimization converged to single feature
+**Selection:** Used beam search optimization on 2025 validation set, converged to single feature
 
 **Result:** Strong performance with minimal features
 
 **Top Feature:** `climate_risk_drought_weighted_country_cumsum`
-- High significance rate
-- Strong maximum correlation
+- Year-plus rolling window captures annual cycles and multi-season persistence
+- High significance rate and strong maximum correlation
+- Demonstrates "less is more" philosophy
 
 #### Uniqueness
 - **Extreme Parsimony:** Single feature achieves strong results
@@ -579,37 +671,55 @@ Ultra-minimalist—focuses on long-term accumulation of drought risk (400-430 da
 
 ### 12. ravi123a321at
 
-#### Strategy: Phenology-Weighted Stress
+#### Strategy: Phenology-Weighted Stress with Spatial Concentration
 
 **Core Approach:**  
-Domain-driven approach incorporating **phenology** (plant growth stages) to weight climate stressors. Focuses on "drought exposure" during critical growing months and spatial concentration.
+Domain-driven approach incorporating **phenology** (crop growth stages) to weight climate stressors by biological vulnerability windows. Combines temporal weighting with spatial concentration metrics (HHI) to capture both "when" and "where" risks matter most.
 
-**Feature Engineering Steps:**
-1. **Baseline Features:** 22 base risk features
-2. **Country Aggregation:** Mean, max, std across regions
-3. **Spatial Concentration (HHI):** Herfindahl-Hirschman Index for risk distribution
-4. **Phenology Weighting:** Month-specific weights (e.g., "Month 7 weight = 1.0")
-5. **Monthly Aggregation:** Phenology features aggregated to monthly means
-6. **Soil Moisture (Optional):** External data integration (graceful degradation if missing)
+**Actual Implementation:**
 
-**Total Features:** 33
+**Feature Engineering Pipeline:**
+1. **Baseline Features (22):**
+   - Raw risk counts (Low/Med/High × Heat/Drought/Precip)
+   - Basic temporal features (day of year, month)
+2. **Country Aggregations:**
+   - Mean, max, std across regions per country-date
+   - Captures national-level risk patterns
+3. **Spatial Concentration (HHI):**
+   - Herfindahl-Hirschman Index: $HHI = \sum_{i=1}^{n} s_i^2$
+   - Where $s_i$ = region i's share of total risk
+   - Measures whether risk is concentrated (HHI→1) vs scattered (HHI→0)
+4. **Phenology Weighting:**
+   - Month-specific multipliers based on growth stages
+   - Example: "Month 7 weight = 1.0" (critical flowering/pollination)
+   - Months 5-9 weighted higher for Northern Hemisphere
+5. **Monthly Aggregation:**
+   - Phenology features aggregated to monthly means
+   - Aligns with biological time scales
+6. **Soil Moisture (Optional):**
+   - External data from `external_soil_data.csv` (if available)
+   - Graceful degradation if missing—code continues without it
+7. **Feature Selection:** Correlation + importance filtering
 
-**HHI Formula:**
-$$HHI = \sum_{i=1}^{n} s_i^2$$
-where $s_i$ is region i's share of total risk
+**Total Features:** 33 (baseline + aggregations + phenology + HHI)
+
+**Modeling:** Gradient boosting with feature importance ranking
 
 #### Uniqueness
-- **HHI (Herfindahl-Hirschman Index):** Adapts economic concentration metric to climate risk
-- **Phenology-Driven Weighting:** Timing-aware feature construction
+- **HHI Adaptation:** Applies Herfindahl-Hirschman Index (economics concentration metric) to climate risk distribution
+- **Phenology-Driven Weighting:** Growth-stage-aware feature construction captures biological vulnerability windows
+- **"When" × "Where":** Combines temporal (phenology) and spatial (HHI) dimensions
 
 #### Creativity
-- Domain science approach—models *when* crops are vulnerable
-- HHI captures whether risk is concentrated vs scattered
+- **Domain Science Integration:** Models *when* crops are vulnerable (flowering, grain fill)
+- **Concentration Metric:** HHI captures whether risk is "localized crisis" vs "widespread problem"
+- **Biological Time Scales:** Monthly aggregation respects plant physiology
 
 #### Flaws
-- **Heuristic Weights:** Manual phenology weights instead of learned
-- **Missing External Data:** `external_soil_data.csv` not included
-- **Row Count Issue:** 320,661 output needs filtering
+- **Heuristic Weights:** Manual phenology weights instead of data-driven learning
+- **Missing External Data:** `external_soil_data.csv` not provided in submission
+- **Row Count Issue:** 320,661 output rows vs required 219,161 (needs post-processing filter)
+- **Northern Hemisphere Bias:** Phenology weights optimized for US corn belt, may not transfer to Brazil
 
 ---
 
