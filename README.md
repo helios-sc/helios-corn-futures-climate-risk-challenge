@@ -167,14 +167,6 @@ df = pd.read_csv('./data/corn_climate_risk_futures_daily_master.csv')
 
 #### Prerequisites
 
-```bash
-# Install required packages (adjust based on solution)
-pip install pandas numpy scikit-learn
-pip install matplotlib seaborn  # For visualization
-pip install lightgbm xgboost     # If solution uses gradient boosting
-pip install torch                # If solution uses neural networks (e.g., Mr RRR)
-```
-
 #### Step 1: Download and Extract Dataset
 
 ```bash
