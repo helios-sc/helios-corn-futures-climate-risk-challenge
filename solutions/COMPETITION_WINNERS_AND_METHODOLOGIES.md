@@ -37,31 +37,42 @@
 This report documents the methodologies used by participants in the Helios Corn Futures Climate Challenge Kaggle competition. Each participant attempted to engineer climate risk features that correlate with corn futures prices. The approaches range from simple rolling averages to sophisticated AutoEncoder neural networks and exhaustive grid searches.
 
 **Competition Winners:**
-- 🥇 **1st Place**: [limyuxin](https://www.kaggle.com/limyuxin) - **88.82 CFCS** - Brute Force Factor Mining
-- 🥈 **2nd Place**: [DragonAJA](https://www.kaggle.com/dragonaja) - **86.85 CFCS** - Massive Feature Engineering & Optimization
-- 🥉 **3rd Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS** - Deep Sweep Grid Search
+- 🥇 **1st Place**: [limyuxin](https://www.kaggle.com/limyuxin) - **88.82 CFCS** (Rank 46) - Brute Force Factor Mining
+- 🥈 **2nd Place**: [DragonAJA](https://www.kaggle.com/dragonaja) - **86.85 CFCS** (Rank 48) - Massive Feature Engineering & Optimization
+- 🥉 **3rd Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS** (Rank 49) - Deep Sweep Grid Search
 
-Note: Some participants were disqualified for rule violations and have been removed from this report.
+**Notable Mention:**
+- **Rank 47**: SwastikR@1001 - **87.43 CFCS** (Not included in solutions analysis)
+
+**Leaderboard Structure:**
+- Ranks 1-45: Baseline scores (100.00) indicating disqualification or non-compliant submissions
+- Ranks 46-49: Top competitive scores (88.82 - 84.20 CFCS)
+- Ranks 50-99: Competitive scores (83.73 - 59.24 CFCS) - includes majority of reviewed participants
+- All 16 reviewed participants have been matched with their official leaderboard rankings and CFCS scores
+
+**Status:**
+- Some participants were disqualified for rule violations and have been removed from this report
 
 ### Quick Reference Table
 
 | Rank | Participant | Strategy | CFCS Score | Status | Uniqueness |
 |------|-------------|----------|------------|--------|------------|
-| 🥇 1st | [limyuxin](https://www.kaggle.com/limyuxin) | Brute Force Factor Mining | **88.82** | WINNER | Grid search methodology, PCA proxy |
-| 🥈 2nd | [DragonAJA](https://www.kaggle.com/dragonaja) | Massive Feature Engineering & Optimization | **86.85** | WINNER | 12 transformation methods, CFCS-specific optimization |
-| 🥉 3rd | [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) | Deep Sweep Grid Search | **84.20** | WINNER | Systematic caching + parameter sweep |
-| - | cmasch | Massive Agronomic Feature Engineering | - | PASS | GDD, phenology-based |
-| - | bluetriad | Technical Analysis of Climate | - | PASS | EMA, RSI-like indicators |
-| - | GPCH | Modular Package | - | FAIL | Missing dependencies |
-| - | Mr RRR | AutoEncoder Feature Extraction | - | PASS | Neural network compression |
-| - | PxlPau | Signal Sharpening | - | PASS | Power law, hemispheric gating |
-| - | aaaml007 | Quantile Binning | - | PASS (Warning) | Exhaustive statistical binning |
-| - | cg | Production-Weighted Global Risk | - | PASS | Economic weighting |
-| - | chetank99 | Relative Risk Ratios | - | PASS | Seasonal gating, ratio signals |
-| - | ezberch | Brute Force Correlation Mining | - | PASS | Macro-climate linkage |
-| - | ganeshstemx | Quantile Binning | - | PASS | Temporal quantile bins |
-| - | kadircandrisolu | Cumulative Drought Stress | - | PASS | Single feature, ultra-long windows |
-| - | ravi123a321at | Phenology-Weighted Stress | - | PASS | HHI concentration metric |
+| 🥇 46 | [limyuxin](https://www.kaggle.com/limyuxin) | Brute Force Factor Mining | **88.82** | WINNER | Grid search methodology, PCA proxy |
+| 🥈 48 | [DragonAJA](https://www.kaggle.com/dragonaja) | Massive Feature Engineering & Optimization | **86.85** | WINNER | 12 transformation methods, CFCS-specific optimization |
+| 🥉 49 | [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) | Deep Sweep Grid Search | **84.20** | WINNER | Systematic caching + parameter sweep |
+| 80 | [cmasch](https://www.kaggle.com/cmasch) | Massive Agronomic Feature Engineering | 69.01 | PASS | GDD, phenology-based |
+| 69 | [bluetriad](https://www.kaggle.com/bluetriad) | Technical Analysis of Climate | 76.29 | PASS | EMA, RSI-like indicators |
+| 73 | [GPCH2159](https://www.kaggle.com/gpch2159) | Modular Package | 74.23 | FAIL | Missing dependencies |
+| 84 | [Mr RRR](https://www.kaggle.com/larrylin666) | AutoEncoder Feature Extraction | 66.33 | PASS | Neural network compression |
+| 97 | [PxlPau](https://www.kaggle.com/studybeetutoring) | Signal Sharpening | 59.67 | PASS | Power law, hemispheric gating |
+| 44 | [aaaml007](https://www.kaggle.com/aaaml007) | Quantile Binning | 100.00 | PASS (Warning) | Exhaustive statistical binning |
+| 54 | [cg](https://www.kaggle.com/chaitanyagarg2) | Production-Weighted Global Risk | 82.35 | PASS | Economic weighting |
+| 68 | [chetank99](https://www.kaggle.com/chetank99) | Relative Risk Ratios | 77.07 | PASS | Seasonal gating, ratio signals |
+| 63 | [ezberch](https://www.kaggle.com/ezberch) | Brute Force Correlation Mining | 80.47 | PASS | Macro-climate linkage |
+| 67 | [ganeshstemx](https://www.kaggle.com/ganeshstemx) | Quantile Binning | 78.17 | PASS | Temporal quantile bins |
+| 65 | [kadircandrisolu](https://www.kaggle.com/kadircandrisolu) | Cumulative Drought Stress | 79.26 | PASS | Single feature, ultra-long windows |
+| 91 | [ravi123a321at](https://www.kaggle.com/ravi123a321at) | Phenology-Weighted Stress | 64.02 | PASS | HHI concentration metric |
+| 78 | [osamurai](https://www.kaggle.com/osamurai) | - | 72.33 | PASS | - |
 
 ---
 
@@ -209,7 +220,7 @@ Pragmatic regime-dependent evaluation within country-by-month seasonal buckets t
 
 ---
 
-### 1. cmasch
+### 1. [cmasch](https://www.kaggle.com/cmasch)
 
 #### Strategy: Agronomic Feature Engineering with Dual-Mode Architecture
 
@@ -247,7 +258,7 @@ Dual-mode system supporting pure Helios data and optional external data integrat
 
 ---
 
-### 2. bluetriad
+### 2. [bluetriad](https://www.kaggle.com/bluetriad)
 
 #### Strategy: Climate Oscillation Integration with CFCS-Aware Selection
 
@@ -385,7 +396,7 @@ A sophisticated 5-stage pipeline using deep learning (PyTorch AutoEncoder) for n
 
 ---
 
-### 5. PxlPau
+### 5. [PxlPau](https://www.kaggle.com/pxlpau)
 
 #### Strategy: Signal Sharpening via Power Law via Power Law
 
@@ -423,7 +434,9 @@ Focuses on **"Bio-Economic Interaction"**—Climate Risk strength depends on (A)
 
 ---
 
-### 6. aaaml007
+### 6. [aaaml007](https://www.kaggle.com/aaaml007)
+
+**CFCS Score:** 100.00
 
 #### Strategy: Production-Weighted Cumulative Stress with Multi-Timescale Lags
 
@@ -458,7 +471,7 @@ Builds "economically meaningful signals" by weighting climate risks by `percent_
 
 ---
 
-### 7. cg
+### 7. [cg](https://www.kaggle.com/cg)
 
 #### Strategy: Global Production-Weighted Risk Aggregation
 
@@ -497,7 +510,7 @@ Hypothesizes that global aggregate production-weighted climate risk has stronger
 
 ---
 
-### 8. chetank99
+### 8. [chetank99](https://www.kaggle.com/chetank99)
 
 #### Strategy: Relative Risk Ratios with Hemispheric Harvest Gating
 
@@ -538,7 +551,7 @@ Hypothesis: Local climate risk impact depends on **global context**—high local
 
 ---
 
-### 9. ezberch
+### 9. [ezberch](https://www.kaggle.com/ezberch)
 
 #### Strategy: Parallel Correlation Mining with Macro-Climate Indices
 
@@ -577,7 +590,7 @@ Generates massive feature combinations (aggregations, lags, transformations) and
 
 ---
 
-### 10. ganeshstemx
+### 10. [ganeshstemx](https://www.kaggle.com/ganeshstemx)
 
 #### Strategy: Non-Overlapping Temporal Quantile Binning
 
@@ -629,7 +642,7 @@ Segments the full time series into non-overlapping temporal bins (tertiles, quar
 
 ---
 
-### 11. kadircandrisolu
+### 11. [kadircandrisolu](https://www.kaggle.com/kadircandrisolu)
 
 #### Strategy: Ultra-Long Window Cumulative Drought Tracking
 
@@ -669,7 +682,7 @@ Focuses on long-term pattern detection using extended rolling windows [400,410,4
 
 ---
 
-### 12. ravi123a321at
+### 12. [ravi123a321at](https://www.kaggle.com/ravi123a321at)
 
 #### Strategy: Phenology-Weighted Stress with Spatial Concentration
 
