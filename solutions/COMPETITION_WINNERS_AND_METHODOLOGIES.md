@@ -10,22 +10,23 @@
 1. [Executive Summary](#executive-summary)
 2. [Participant Methodologies](#participant-methodologies)
    - [Competition Winners](#competition-winners)
-     - [1st Place: limyuxin](#-1st-place---limyuxin)
-     - [2nd Place: DragonAJA](#-2nd-place---dragonaja)
-     - [3rd Place: yukanglimofficial](#-3rd-place---yukanglimofficial)
+     - [1st Place: DragonAJA](#-1st-place---dragonaja)
+     - [2nd Place: yukanglimofficial](#-2nd-place---yukanglimofficial)
+     - [3rd Place: cg](#-3rd-place---cg)
    - [Other Participants](#other-participants)
-   - [cmasch](#1-cmasch)
-   - [bluetriad](#2-bluetriad)
-   - [GPCH](#3-gpch)
-   - [Mr RRR](#4-mr-rrr)
-   - [PxlPau](#5-pxlpau)
-   - [aaaml007](#6-aaaml007)
-   - [cg](#7-cg)
+   - [limyuxin](#1-limyuxin)
+   - [cmasch](#2-cmasch)
+   - [bluetriad](#3-bluetriad)
+   - [GPCH](#4-gpch)
+   - [Mr RRR](#5-mr-rrr)
+   - [PxlPau](#6-pxlpau)
+   - [aaaml007](#7-aaaml007)
    - [chetank99](#8-chetank99)
    - [ezberch](#9-ezberch)
    - [ganeshstemx](#10-ganeshstemx)
    - [kadircandrisolu](#11-kadircandrisolu)
    - [ravi123a321at](#12-ravi123a321at)
+   - [osamurai](#13-osamurai)
 3. [Comparative Analysis](#comparative-analysis)
 4. [Key Insights](#key-insights)
 
@@ -36,11 +37,12 @@
 This report documents the methodologies used by participants in the Helios Corn Futures Climate Challenge Kaggle competition. Each participant attempted to engineer climate risk features that correlate with corn futures prices. The approaches range from simple rolling averages to sophisticated AutoEncoder neural networks and exhaustive grid searches.
 
 **Competition Winners:**
-- 🥇 **1st Place**: [limyuxin](https://www.kaggle.com/limyuxin) - **88.82 CFCS** (Rank 46) - Brute Force Factor Mining
-- 🥈 **2nd Place**: [DragonAJA](https://www.kaggle.com/dragonaja) - **86.85 CFCS** (Rank 48) - Massive Feature Engineering & Optimization
-- 🥉 **3rd Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS** (Rank 49) - Deep Sweep Grid Search
+- 🥇 **1st Place**: [DragonAJA](https://www.kaggle.com/dragonaja) - **86.85 CFCS** (Rank 48) - Massive Feature Engineering & Optimization
+- 🥈 **2nd Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS** (Rank 49) - Deep Sweep Grid Search
+- 🥉 **3rd Place**: [cg](https://www.kaggle.com/chaitanyagarg2) - **82.35 CFCS** (Rank 68) - Global Production-Weighted Risk
 
-**Notable Mention:**
+**Notable Mentions:**
+- **Rank 46**: limyuxin - **88.82 CFCS** - Brute Force Factor Mining
 - **Rank 47**: SwastikR@1001 - **87.43 CFCS** (Not included in solutions analysis)
 
 **Leaderboard Structure:**
@@ -56,9 +58,10 @@ This report documents the methodologies used by participants in the Helios Corn 
 
 | Participant | Strategy | CFCS Score | Uniqueness |
 |-------------|----------|------------|------------|
-| 🥇 [limyuxin](https://www.kaggle.com/limyuxin) | Brute Force Factor Mining | **88.82** | Systematic caching pipeline + parameter sweep across 1000+ combinations |
-| 🥈 [DragonAJA](https://www.kaggle.com/dragonaja) | Massive Feature Engineering & Optimization | **86.85** | 12 transformation methods, iterative feature refinement, CFCS-driven optimization |
-| 🥉 [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) | Deep Sweep Grid Search | **84.20** | Comprehensive parameter space exploration with stability validation |
+| 🥇 [DragonAJA](https://www.kaggle.com/dragonaja) | Massive Feature Engineering & Optimization | **86.85** | 12 transformation methods, iterative feature refinement, CFCS-driven optimization |
+| 🥈 [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) | Deep Sweep Grid Search | **84.20** | Comprehensive parameter space exploration with stability validation |
+| 🥉 [cg](https://www.kaggle.com/chaitanyagarg2) | Global Production-Weighted Risk | **82.35** | Global risk hypothesis, economic weighting throughout, momentum layers |
+| [limyuxin](https://www.kaggle.com/limyuxin) | Brute Force Factor Mining | 88.82 | Systematic caching pipeline + parameter sweep across 1000+ combinations |
 | [cmasch](https://www.kaggle.com/cmasch) | Agronomic Feature Engineering | 69.01 | GDD deficit, stress day counting, grain fill period masking |
 | [bluetriad](https://www.kaggle.com/bluetriad) | Climate Oscillation Integration | 76.29 | Climate technicals, cumulative sums, CFCS-aware selection |
 | [GPCH2159](https://www.kaggle.com/gpch2159) | Modular Package Structure | 74.23 | Professional code organization (incomplete - missing dependencies) |
@@ -71,7 +74,7 @@ This report documents the methodologies used by participants in the Helios Corn 
 | [ganeshstemx](https://www.kaggle.com/ganeshstemx) | Temporal Quantile Binning | 78.17 | Non-overlapping time segments, compound interactions, non-drought inverse signals |
 | [kadircandrisolu](https://www.kaggle.com/kadircandrisolu) | Ultra-Long Window Cumulative Drought | 79.26 | Extreme parsimony (single feature), 400+ day windows, cumulative tracking |
 | [ravi123a321at](https://www.kaggle.com/ravi123a321at) | Phenology-Weighted Stress | 64.02 | HHI concentration metric, growth-stage-aware weighting, biological time scales |
-| [osamurai](https://www.kaggle.com/osamurai) | - | 72.33 | - |
+| [osamurai](https://www.kaggle.com/osamurai) | LightGBM Feature Transformation | 72.33 | LightGBM predictions as features, L9 orthogonal array optimization, comprehensive interactions |
 
 ---
 
@@ -81,55 +84,7 @@ This report documents the methodologies used by participants in the Helios Corn 
 
 ## Competition Winners
 
-### 🥇 1st Place - [limyuxin](https://www.kaggle.com/limyuxin)
-
-**CFCS Score:** **88.82**
-
-**Strategy:** Brute Force Factor Mining
-
-**Core Approach:**  
-Builds a sophisticated "stress primitives" framework creating both level and anomaly versions of every signal. Implements three alternative production-weighting schemes (share_norm_fill1, share_only_norm, share_plus_locations) and uses explicit anomaly detection via day-of-year z-scores to remove predictable seasonality. Uses two-stage sweep: fast proxy screening using PC1 of futures panel within country-month buckets, followed by tight local refinements.
-
-**Feature Engineering Steps:**
-1. **Stress Primitives:** Three signal types per risk category
-   - Severity ratios (sev_wmean)
-   - Warning-or-worse share (wapr_wmean) 
-   - High-risk share (high_wmean)
-2. **Composites:** Intuitive climate stress indicators
-   - Wet-dry imbalance: wet_wapr_wmean - dry_wapr_wmean
-   - Temperature stress: max(heat severity, cold severity)
-   - Precipitation stress: max(drought, excess precipitation)
-   - Overall stress: max across all four risk types
-3. **Country-Level Signals:** Under 3 production-weighting schemes
-4. **Surprise Variables:** Day-of-year z-scores for both level and anomaly series
-5. **Temporal Transforms:** Rolling std, streak-fraction operations (streakthr0.5), square transformations (sign(x) × x²)
-6. **Parameter Search:** Windows (w=527), shifts (0-86 days), multiple aggregations (ma, max, ewm, std)
-
-**Selection Method:**
-- **Stage 1 (Screening):** Extracts PC1 from futures panel per country-month bucket
-- Scores climate features that co-move with PC1 for fast breadth-first search  
-- **Stage 2 (Refinement):** Top hypotheses refined with local sweeps around lag/window settings
-- Prioritizes using CFCS metric across multiple recent-year slices
-- Year-demeaned sanity check emphasizes candidates that stay broad and stable across periods
-
-**Uniqueness:**
-- **Stress Primitives Framework:** Three distinct signal types (severity, warning-or-worse, high-risk share) rather than simple averages
-- **Dual Signal System:** Creates both level and surprise (anomaly) versions using day-of-year z-scores
-- **PC1 Proxy Innovation:** Uses first principal component of futures panel as fast screening mechanism instead of brute-force correlation testing
-- **Triple Weighting Schemes:** Tests share_norm_fill1, share_only_norm, and share_plus_locations alternatives
-- **Streak Detection:** Custom binary persistence patterns (streakthr0.5) for tracking sustained climate conditions
-- **Square Transformations:** Sign-preserving squared transforms (sign(x) × x²) for amplifying signals
-- **Regime Stability:** Year-demeaned validation ensures features work across multiple periods, not just one
-
-**Why This Won:**
-- Systematic exploration of parameter space without domain assumptions
-- Novel use of PCA for efficient correlation proxy
-- Robust validation across multiple time periods
-- Avoids overfitting through year-demeaned sanity checks
-
----
-
-### 🥈 2nd Place - [DragonAJA](https://www.kaggle.com/dragonaja)
+### 🥇 1st Place - [DragonAJA](https://www.kaggle.com/dragonaja)
 
 **CFCS Score:** **86.85**
 
@@ -178,7 +133,7 @@ Generated **2000+ candidate features** through 12 distinct transformation method
 
 ---
 
-### 🥉 3rd Place - [yukanglimofficial](https://www.kaggle.com/yukanglimofficial)
+### � 2nd Place - [yukanglimofficial](https://www.kaggle.com/yukanglimofficial)
 
 **CFCS Score:** **84.20**
 
@@ -215,11 +170,97 @@ Pragmatic regime-dependent evaluation within country-by-month seasonal buckets t
 
 ---
 
+### 🥉 3rd Place - [cg](https://www.kaggle.com/chaitanyagarg2)
+
+**CFCS Score:** **82.35**
+
+**Strategy:** Global Production-Weighted Risk Aggregation
+
+**Core Approach:**  
+Hypothesizes that global aggregate production-weighted climate risk has stronger predictive power than individual country/region signals. Constructs composite risk indicators weighted by `percent_country_production`. Features the most economically-aware approach, reflecting that major producers like Iowa (16% of US production) dominate market sentiment.
+
+**Feature Engineering Steps:**
+1. **Base Risk Scores:** 8 features from raw climate counts (Low/Medium/High × Heat/Drought/Precipitation)
+2. **Composite Indicators:** 12 features
+   - Temperature stress (heat aggregation)
+   - Precipitation stress (drought + precip aggregation)
+   - Overall/combined stress metrics
+3. **Rolling Aggregations:** 36 features over 7, 14, 30 day windows (means, maxes, sums)
+4. **Momentum Features:** 48 features capturing changes and acceleration
+   - First differences (7d, 14d, 30d)
+   - Second differences (acceleration)
+5. **Country Aggregations:** 68 features (national-level patterns)
+6. **Feature Selection:** Top 30 by Pearson correlation with target
+7. **Modeling:** Gradient boosting (likely XGBoost or LightGBM)
+
+**Uniqueness:**
+- **Global Risk Hypothesis:** Aggregate worldwide production-weighted risk > individual regional risks
+- **Economic Weighting Throughout:** Production shares integrated at every aggregation step
+- **Momentum Layers:** Captures both magnitude and rate-of-change in climate stress
+- **Domain Awareness:** Reflects real market dynamics where major producers dominate price formation
+- **Composite Signals:** Temperature/precipitation stress as derived economic indicators
+
+**Why This Won:**
+- Strong economic foundation - markets react to production-weighted global risk
+- Comprehensive momentum modeling captures both levels and changes
+- Clean feature selection process with 30 high-quality features
+- Successfully reproduced submission with gradient boosting approach
+
+---
+
 ## Other Participants
 
 ---
 
-### 1. [cmasch](https://www.kaggle.com/cmasch)
+### 1. [limyuxin](https://www.kaggle.com/limyuxin)
+
+**CFCS Score:** 88.82 (Rank 46 - Not awarded prize)
+
+**Strategy:** Brute Force Factor Mining
+
+**Core Approach:**  
+Builds a sophisticated "stress primitives" framework creating both level and anomaly versions of every signal. Implements three alternative production-weighting schemes (share_norm_fill1, share_only_norm, share_plus_locations) and uses explicit anomaly detection via day-of-year z-scores to remove predictable seasonality. Uses two-stage sweep: fast proxy screening using PC1 of futures panel within country-month buckets, followed by tight local refinements.
+
+**Feature Engineering Steps:**
+1. **Stress Primitives:** Three signal types per risk category
+   - Severity ratios (sev_wmean)
+   - Warning-or-worse share (wapr_wmean) 
+   - High-risk share (high_wmean)
+2. **Composites:** Intuitive climate stress indicators
+   - Wet-dry imbalance: wet_wapr_wmean - dry_wapr_wmean
+   - Temperature stress: max(heat severity, cold severity)
+   - Precipitation stress: max(drought, excess precipitation)
+   - Overall stress: max across all four risk types
+3. **Country-Level Signals:** Under 3 production-weighting schemes
+4. **Surprise Variables:** Day-of-year z-scores for both level and anomaly series
+5. **Temporal Transforms:** Rolling std, streak-fraction operations (streakthr0.5), square transformations (sign(x) × x²)
+6. **Parameter Search:** Windows (w=527), shifts (0-86 days), multiple aggregations (ma, max, ewm, std)
+
+**Selection Method:**
+- **Stage 1 (Screening):** Extracts PC1 from futures panel per country-month bucket
+- Scores climate features that co-move with PC1 for fast breadth-first search  
+- **Stage 2 (Refinement):** Top hypotheses refined with local sweeps around lag/window settings
+- Prioritizes using CFCS metric across multiple recent-year slices
+- Year-demeaned sanity check emphasizes candidates that stay broad and stable across periods
+
+**Uniqueness:**
+- **Stress Primitives Framework:** Three distinct signal types (severity, warning-or-worse, high-risk share) rather than simple averages
+- **Dual Signal System:** Creates both level and surprise (anomaly) versions using day-of-year z-scores
+- **PC1 Proxy Innovation:** Uses first principal component of futures panel as fast screening mechanism instead of brute-force correlation testing
+- **Triple Weighting Schemes:** Tests share_norm_fill1, share_only_norm, and share_plus_locations alternatives
+- **Streak Detection:** Custom binary persistence patterns (streakthr0.5) for tracking sustained climate conditions
+- **Square Transformations:** Sign-preserving squared transforms (sign(x) × x²) for amplifying signals
+- **Regime Stability:** Year-demeaned validation ensures features work across multiple periods, not just one
+
+**Technical Merit:**
+- Systematic exploration of parameter space without domain assumptions
+- Novel use of PCA for efficient correlation proxy
+- Robust validation across multiple time periods
+- Avoids overfitting through year-demeaned sanity checks
+
+---
+
+### 2. [cmasch](https://www.kaggle.com/cmasch)
 
 #### Strategy: Agronomic Feature Engineering with Dual-Mode Architecture
 
@@ -257,7 +298,7 @@ Dual-mode system supporting pure Helios data and optional external data integrat
 
 ---
 
-### 2. [bluetriad](https://www.kaggle.com/bluetriad)
+### 3. [bluetriad](https://www.kaggle.com/bluetriad)
 
 #### Strategy: Climate Oscillation Integration with CFCS-Aware Selection
 
@@ -467,45 +508,6 @@ Builds "economically meaningful signals" by weighting climate risks by `percent_
 #### Flaws
 - **Feature Explosion:** ~300 features may include redundancy
 - **Static Production Weights:** Annual production shares treated as constant
-
----
-
-### 7. [cg](https://www.kaggle.com/cg)
-
-#### Strategy: Global Production-Weighted Risk Aggregation
-
-**Core Approach:**  
-Hypothesizes that global aggregate production-weighted climate risk has stronger predictive power than individual country/region signals. Constructs composite risk indicators weighted by `percent_country_production`.
-
-**Actual Implementation:**
-1. **Base Risk Scores:** 8 features from raw climate counts (Low/Medium/High × Heat/Drought/Precipitation)
-2. **Composite Indicators:** 12 features
-   - Temperature stress (heat aggregation)
-   - Precipitation stress (drought + precip aggregation)
-   - Overall/combined stress metrics
-3. **Rolling Aggregations:** 36 features over 7, 14, 30 day windows (means, maxes, sums)
-4. **Momentum Features:** 48 features capturing changes and acceleration
-   - First differences (7d, 14d, 30d)
-   - Second differences (acceleration)
-5. **Country Aggregations:** 68 features (national-level patterns)
-6. **Feature Selection:** Top 30 by Pearson correlation with target
-7. **Modeling:** Gradient boosting (likely XGBoost or LightGBM)
-
-**Result:** Successfully reproduced submission
-
-#### Uniqueness
-- **Global Risk Hypothesis:** Aggregate worldwide production-weighted risk > individual regional risks
-- **Economic Weighting Throughout:** Production shares integrated at every aggregation step
-- **Momentum Layers:** Captures both magnitude and rate-of-change
-
-#### Creativity
-- **Domain Awareness:** Reflects real market dynamics where major producers (Iowa 16% US) dominate
-- **Composite Signals:** Temperature/precipitation stress as derived indicators
-
-#### Flaws
-- **Static Weights:** Production shares hardcoded, not time-varying
-- **Correlation Selection:** Top-30 by linear correlation may miss non-linear patterns
-- **No Lagging:** Limited temporal modeling compared to delayed-response approaches
 
 ---
 
@@ -735,7 +737,110 @@ Domain-driven approach incorporating **phenology** (crop growth stages) to weigh
 
 ---
 
-## Comparative Analysis
+### 13. [osamurai](https://www.kaggle.com/osamurai)
+
+**CFCS Score:** 72.33 (Rank 72)
+
+#### Strategy: Comprehensive Feature Engineering with LightGBM-Based Transformations
+
+**Core Approach:**  
+Systematic feature engineering pipeline covering production-weighted risks, seasonal interactions, temporal aggregations, and non-linear transformations. Uniquely uses LightGBM models to generate prediction-based features (predicting futures from climate data only) as complex non-linear transformations of climate signals. Two-stage hyperparameter optimization: L9 Orthogonal Array for global search + Optuna for local refinement.
+
+**Feature Engineering Pipeline:**
+
+1. **Base Risk Scores:** Weighted risk calculation per category
+   - `(medium + 2×high) / (low + medium + high + ε)`
+   - Additional high_ratio and elevated_ratio features
+   
+2. **Production-Weighted Risks:** Regional economic importance
+   - Risk scores × `percent_country_production`
+   - Emphasizes major production regions
+
+3. **Composite Stress Indices:**
+   - Temperature stress: max(heat, cold)
+   - Precipitation stress: max(excess_precip, drought)
+   - Overall/combined/total stress: max, mean, sum across all categories
+
+4. **Seasonal & Harvest Period Features:**
+   - Risk × harvest_period interactions (Planting, Growing, Vegetative, Reproductive)
+   - Growing season flag for active growth periods
+   - Summer (Jun-Aug) and winter (Dec-Feb) seasonal multipliers
+
+5. **Rolling Window Statistics:** 7, 14, 30-day windows
+   - Moving averages, rolling max/min, rolling std
+   - Per region and risk category
+
+6. **Lag Features:** 1, 3, 7, 14, 21 days
+   - Captures delayed market responses
+
+7. **Momentum & Acceleration:**
+   - First differences: 1d, 7d, 14d changes
+   - Second differences: acceleration (change in change)
+
+8. **Country & Global Aggregations:**
+   - Country-level: mean, max, std, min across regions
+   - Global-level: aggregated stats across US, Brazil, Argentina, China
+
+9. **Non-linear Transformations:**
+   - Squared and cubed risk scores (convex damage functions)
+   - Log and sqrt transformations
+   - Binary threshold flags: high_risk (>1.0), extreme_risk (>1.5)
+
+10. **Interaction Features:**
+    - Heat × drought (compounding dry-heat)
+    - Cold × excess_precip (compounding cold-wet)
+    - Temperature × precipitation stress
+    - Four-way product of all risk scores
+    - Temperature-to-precipitation ratio
+
+11. **LightGBM Prediction Features (Novel):**
+    - Trained 17 LightGBM models (one per futures_* target)
+    - Input: Only `climate_risk_*` features
+    - Output: `climate_risk_lgb_pred_*` features
+    - Additional: Lags (1, 3, 7, 14d), differences, rolling averages of predictions
+    - **Rationale:** Complex non-linear mappings from climate to futures as derived features
+
+**Hyperparameter Optimization:**
+
+**Stage 1 - L9 Orthogonal Array (Global Search):**
+- 3 levels × 4 factors = 9 experiments
+- Factors: num_leaves [31,63,127], learning_rate [0.01,0.03,0.05], feature_fraction [0.6,0.7,0.8], min_child_samples [10,20,50]
+- Efficient global parameter space exploration
+
+**Stage 2 - Optuna (Local Refinement):**
+- 30 trials starting from best L9 result
+- Narrowed search range around promising region
+
+**Final Model:**
+- Algorithm: LightGBM (gbdt)
+- Cross-validation: 10-fold TimeSeriesSplit
+- Early stopping: 50 rounds (max 500)
+- Ensemble: Averaged predictions across folds
+
+#### Uniqueness
+- **LightGBM as Feature Generator:** Uses ML predictions as derived climate features (compliance-aware approach)
+- **Two-Stage Optimization:** L9 orthogonal array + Optuna for efficient hyperparameter search
+- **Comprehensive Coverage:** Combines domain knowledge (harvest periods), statistical methods (rolling windows), and ML transformations
+- **Interaction Richness:** Extensive cross-category risk interactions
+
+#### Creativity
+- **Prediction-Based Features:** Novel interpretation of "feature engineering" - predictions are complex transformations of climate data
+- **Orthogonal Array Design:** Applies DOE (Design of Experiments) methodology for hyperparameter search
+- **Cascade Architecture:** Base features → composite features → prediction features → final model
+
+#### Compliance Note
+- **LightGBM features validated:** Models trained using only `climate_risk_*` inputs, predicting `futures_*` targets
+- Information flow: `climate_risk_*` → LightGBM → `climate_risk_lgb_pred_*` (one-directional)
+- No futures columns used as input features
+- Functionally equivalent to non-linear feature transformation
+
+#### Flaws
+- **Computational Complexity:** Multiple LightGBM models + hyperparameter search = long runtime
+- **Potential Overfitting:** Prediction-based features may memorize training patterns
+- **Interpretability:** LightGBM predictions are black-box transformations
+- **Moderate Score:** Despite comprehensive approach, 72.33 CFCS suggests diminishing returns from complexity
+
+---
 
 ### Approach Categories
 

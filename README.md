@@ -40,9 +40,9 @@ Plus a chance to earn a full-time or internship position at [Helios AI](https://
 ### 🏅 Competition Winners & Results
 
 **Final Leaderboard (Top 3):**
-- 🥇 **1st Place**: [limyuxin](https://www.kaggle.com/limyuxin) - **88.82 CFCS**
-- 🥈 **2nd Place**: [DragonAJA](https://www.kaggle.com/dragonaja) - **86.85 CFCS**  
-- 🥉 **3rd Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS**
+- 🥇 **1st Place**: [DragonAJA](https://www.kaggle.com/dragonaja) - **86.85 CFCS**
+- 🥈 **2nd Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS**  
+- 🥉 **3rd Place**: [cg](https://www.kaggle.com/chaitanyagarg2) - **82.35 CFCS**
 
 **📊 Comprehensive Methodology Report**
 
@@ -280,13 +280,6 @@ for chunk in chunks:
     process(chunk)
 ```
 
-#### Issue 4: Missing External Data
-```bash
-# Some solutions use external climate data (ONI, PDO, FRED, Open-Meteo)
-# These are typically optional enhancements
-# Solutions should work with base data only (sometimes at reduced performance)
-```
-
 ### Solution-Specific Notes
 
 #### Solutions with External Data Requirements:
@@ -308,13 +301,8 @@ for chunk in chunks:
 To verify your reproduction matches the original submission:
 
 ```bash
-# 1. Generate submission file using modified code
-python solution_script.py
 
-# 2. Compare with original submission
-diff my_submission.csv solutions/username/submission.csv
-
-# 3. Evaluate both
+# Evaluate both
 python evaluate.py my_submission.csv
 python evaluate.py solutions/username/submission.csv
 
