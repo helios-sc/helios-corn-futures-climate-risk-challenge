@@ -37,6 +37,30 @@ Agricultural markets are fundamentally driven by weather, but the relationship b
 
 Plus a chance to earn a full-time or internship position at [Helios AI](https://www.helios.sc)!
 
+### 🏅 Competition Winners & Results
+
+**Final Leaderboard (Top 3):**
+- 🥇 **1st Place**: [limyuxin](https://www.kaggle.com/limyuxin) - **88.82 CFCS** (Rank 46)
+- 🥈 **2nd Place**: [DragonAJA](https://www.kaggle.com/dragonaja) - **86.85 CFCS** (Rank 48)  
+- 🥉 **3rd Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS** (Rank 49)
+
+**📊 Comprehensive Methodology Report**
+
+Want to understand how winners achieved their results? Check out our detailed analysis:
+
+**[📖 COMPETITION_WINNERS_AND_METHODOLOGIES.md](solutions/COMPETITION_WINNERS_AND_METHODOLOGIES.md)**
+
+This comprehensive report includes:
+- **Detailed Winner Strategies**: In-depth breakdowns of 1st, 2nd, and 3rd place approaches
+- **16 Participant Solutions**: Complete methodology analysis for all major participants
+- **Quick Reference Table**: Easy comparison of strategies, scores, and unique approaches
+- **Feature Engineering Techniques**: Specific implementation details for each method
+- **Code Analysis**: Actual code patterns and techniques used
+- **Comparative Analysis**: What worked, what didn't, and why
+- **Key Insights**: Lessons learned from the competition
+
+*From brute-force grid searches to neural network autoencoders, this report documents every major approach attempted in the challenge.*
+
 ## 📈 Evaluation Metric
 
 Submissions were ranked using the **Climate-Futures Correlation Score (CFCS)** - a composite metric combining:
@@ -58,6 +82,7 @@ CFCS = (0.5 × Avg_Sig_Corr_Score) + (0.3 × Max_Corr_Score) + (0.2 × Sig_Count
 │   ├── overview.md                 # Competition overview
 │   └── rules.md                    # Competition rules
 ├── solutions/                      # Participant solutions
+│   ├── COMPETITION_WINNERS_AND_METHODOLOGIES.md  # 📊 Comprehensive methodology report
 │   ├── aaaml007/                   # Solution by participant
 │   ├── ardi/
 │   ├── bluetriad/
@@ -105,6 +130,211 @@ This will output:
 - CFCS Score
 - Component breakdown (Avg Significant Correlation, Max Correlation, Significant Count)
 - Top 10 significant correlations
+
+## 🔄 Reproducing Participant Solutions
+
+### Important: Kaggle Environment Differences
+
+⚠️ **All participant solutions were developed for the Kaggle notebook environment** and require modifications to run locally:
+
+#### 1. **Data Loading Differences**
+
+**On Kaggle (original code):**
+```python
+# Kaggle notebooks use predefined input paths
+df = pd.read_csv('/kaggle/input/forecasting-the-future-the-helios-corn-climate-challenge/corn_climate_risk_futures_daily_master.csv')
+```
+
+**Local environment (modified):**
+```python
+# Download dataset first, then use local paths
+df = pd.read_csv('./data/corn_climate_risk_futures_daily_master.csv')
+```
+
+#### 2. **Evaluation Method Differences**
+
+**On Kaggle:**
+- Submissions are uploaded to Kaggle's platform
+- Evaluation runs on private test set with hidden futures data
+- Instant CFCS score feedback through leaderboard
+
+**Local environment:**
+- Use `evaluate.py` script provided in this repository
+- Requires merging your submission with the master dataset
+- Manual scoring using the CFCS formula
+
+### Step-by-Step Reproduction Guide
+
+#### Prerequisites
+
+```bash
+# Install required packages (adjust based on solution)
+pip install pandas numpy scikit-learn
+pip install matplotlib seaborn  # For visualization
+pip install lightgbm xgboost     # If solution uses gradient boosting
+pip install torch                # If solution uses neural networks (e.g., Mr RRR)
+```
+
+#### Step 1: Download and Extract Dataset
+
+```bash
+# Download competition dataset
+kaggle competitions download -c forecasting-the-future-the-helios-corn-climate-challenge
+
+# Extract files
+unzip forecasting-the-future-the-helios-corn-climate-challenge.zip -d data/
+
+# Verify required files
+ls data/
+# Should see:
+#   - corn_climate_risk_futures_daily_master.csv
+#   - corn_regional_market_share.csv
+#   - sample_submission.csv
+```
+
+#### Step 2: Modify Solution Code for Local Environment
+
+**Required Code Changes:**
+
+1. **Update file paths:**
+```python
+# Original Kaggle path
+'/kaggle/input/forecasting-the-future-the-helios-corn-climate-challenge/...'
+
+# Change to local path
+'./data/...'
+```
+
+2. **Handle missing external data:**
+```python
+# Some solutions use external data (e.g., climate indices)
+# These may need to be downloaded separately or gracefully skipped
+try:
+    external_data = pd.read_csv('./data/external_climate_data.csv')
+except FileNotFoundError:
+    print("External data not found, using base features only")
+    external_data = None
+```
+
+3. **Adjust output paths:**
+```python
+# Original: saves to Kaggle's working directory
+submission.to_csv('submission.csv', index=False)
+
+# Local: save to solution-specific folder
+submission.to_csv('./solutions/username/my_submission.csv', index=False)
+```
+
+#### Step 3: Run Solution Code
+
+```bash
+# Navigate to solution directory
+cd solutions/bluetriad/
+
+# Run the solution script (format varies by participant)
+python bluetriad_solution.py
+
+# Or for Jupyter notebooks
+jupyter notebook helios-externaldatav3.ipynb
+```
+
+#### Step 4: Evaluate Results
+
+```bash
+# Use the provided evaluation script
+python ../../evaluate.py ./solutions/bluetriad/submission.csv
+
+# Compare with documented CFCS score
+# Example output:
+# ===========================================
+# CFCS Score: 76.29
+# ===========================================
+# Component Breakdown:
+# - Avg Significant Correlation: 0.xxx
+# - Max Correlation: 0.xxx
+# - Significant Count: xxx
+```
+
+### Common Issues and Solutions
+
+#### Issue 1: Missing Dependencies
+```bash
+# Error: ModuleNotFoundError: No module named 'xxx'
+# Solution: Install missing package
+pip install xxx
+```
+
+#### Issue 2: File Not Found
+```bash
+# Error: FileNotFoundError: [Errno 2] No such file or directory
+# Solution: Check and update all file paths to point to local data directory
+```
+
+#### Issue 3: Memory Errors
+```bash
+# Error: MemoryError or kernel died
+# Solution: Reduce batch size, use chunking, or increase system RAM
+# Example chunking:
+chunks = pd.read_csv('large_file.csv', chunksize=10000)
+for chunk in chunks:
+    process(chunk)
+```
+
+#### Issue 4: Missing External Data
+```bash
+# Some solutions use external climate data (ONI, PDO, FRED, Open-Meteo)
+# These are typically optional enhancements
+# Solutions should work with base data only (sometimes at reduced performance)
+```
+
+### Solution-Specific Notes
+
+#### Solutions with External Data Requirements:
+- **bluetriad**: Uses `extra_climate_data.csv` (climate oscillation indices)
+- **cmasch**: Optional FRED economic indicators + Open-Meteo weather
+- **ezberch**: External macro-climate indices (ONI, PDO)
+
+#### Solutions with Complex Dependencies:
+- **Mr RRR**: Requires PyTorch for AutoEncoder training
+- **GPCH**: Requires custom `src/` package (incomplete in submission)
+
+#### Solutions with Minimal Dependencies:
+- **kadircandrisolu**: Pure pandas/numpy, easy to reproduce
+- **cg**: Standard scikit-learn stack
+- **PxlPau**: Minimal dependencies, straightforward pipeline
+
+### Verifying Reproducibility
+
+To verify your reproduction matches the original submission:
+
+```bash
+# 1. Generate submission file using modified code
+python solution_script.py
+
+# 2. Compare with original submission
+diff my_submission.csv solutions/username/submission.csv
+
+# 3. Evaluate both
+python evaluate.py my_submission.csv
+python evaluate.py solutions/username/submission.csv
+
+# Scores should match (small differences due to floating-point precision are acceptable)
+```
+
+### Running Solutions on Kaggle (Recommended)
+
+For the most accurate reproduction, run solutions directly on Kaggle:
+
+1. Fork the [original competition notebook](https://www.kaggle.com/code/edenecanlilar/sample-notebook-eden)
+2. Copy participant's code into the notebook
+3. Run in Kaggle environment (data paths work automatically)
+4. Submit to competition to verify CFCS score
+
+**Benefits:**
+- No path modifications needed
+- Same environment as original development
+- Access to competition's evaluation infrastructure
+- Faster iteration with pre-loaded datasets
 
 ## 📊 Dataset Highlights
 
