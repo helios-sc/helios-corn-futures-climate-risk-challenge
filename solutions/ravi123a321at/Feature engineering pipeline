@@ -1,0 +1,20 @@
+Feature Engineering Pipeline (Executive Summary)
+The pipeline converts daily climate risk data into biologically meaningful supply-risk signals through a strictly causal, climate-only process. Country-level production-weighted aggregates capture severity and 
+spatial exposure of drought, heat, cold, and excess precipitation. Persistence and cumulative stress features model biological damage accumulation over time. Phenology weighting aligns climate stress with 
+crop growth stages, with separate calendars for Northern and Southern Hemisphere producers. Public, climate-derived soil moisture anomalies are used as physiological confirmation of plant stress. All features are
+aggregated to monthly granularity and exported as climate_risk_* variables only. No futures prices, returns, volatility, or market-derived data are used at any stage
+
+Stage 1: Baseline Climate Aggregation
+Country-level production-weighted aggregation of Helios climate risk variables (drought, heat, cold, excess precipitation).
+
+Stage 2: Persistence and Stress Memory
+Rolling and cumulative climate stress features capturing sustained exposure.
+
+Stage 3: Phenology Weighting
+Climate stress weighted by crop growth stage using hemisphere-specific calendars.
+
+Stage 4: External Physiological Confirmation
+Public soil moisture anomalies are merged at the country-date level to confirm whether climate stress results in actual plant water stress.
+
+Stage 5: Monthly Aggregation and Export
+All features are aggregated to monthly granularity and exported as climate_risk_* columns.

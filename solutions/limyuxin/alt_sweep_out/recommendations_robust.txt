@@ -1,0 +1,53 @@
+Recommendations (robust: sort by robust_min)
+============================================
+
+#001  South Africa  m03  zdoy  share_plus_locations__wet_wapr_wmean  agg=streakthr0.5 w=156 shift=30 transform=signlog1p
+      robust_min=85.24  vy2=87.03  all=81.86  detrended_vy2=63.36
+#002  South Africa  m03  zdoy  share_norm_fill1__wet_wapr_wmean  agg=streakthr0.5 w=156 shift=30 transform=signlog1p
+      robust_min=85.24  vy2=87.03  all=81.86  detrended_vy2=63.36
+#003  Mexico  m01  zdoy  share_plus_locations__wet_dry_diff  agg=std w=77 shift=-21 transform=signlog1p
+      robust_min=84.92  vy2=88.73  all=84.00  detrended_vy2=60.23
+#004  Mexico  m01  zdoy  share_norm_fill1__wet_dry_diff  agg=std w=77 shift=-21 transform=signlog1p
+      robust_min=84.92  vy2=88.73  all=84.00  detrended_vy2=60.23
+#005  Mexico  m01  zdoy  share_only_norm__wet_dry_diff  agg=std w=77 shift=-21 transform=signlog1p
+      robust_min=84.81  vy2=88.68  all=83.93  detrended_vy2=52.41
+#006  South Africa  m01  raw  share_plus_locations__wet_wapr_wmean  agg=streakthr0.5 w=189 shift=18 transform=signlog1p
+      robust_min=84.70  vy2=89.88  all=78.59  detrended_vy2=0.00
+#007  South Africa  m01  raw  share_norm_fill1__wet_wapr_wmean  agg=streakthr0.5 w=189 shift=18 transform=signlog1p
+      robust_min=84.70  vy2=89.88  all=78.59  detrended_vy2=0.00
+#008  Canada  m05  zdoy  share_plus_locations__cold_high_wmean  agg=streakq85 w=153 shift=0 transform=identity
+      robust_min=84.54  vy2=86.40  all=43.53  detrended_vy2=12.85
+#009  Canada  m05  zdoy  share_norm_fill1__cold_high_wmean  agg=streakq85 w=153 shift=0 transform=identity
+      robust_min=84.54  vy2=86.40  all=43.53  detrended_vy2=12.85
+#010  Canada  m05  zdoy  share_only_norm__cold_high_wmean  agg=streakq85 w=153 shift=0 transform=identity
+      robust_min=84.54  vy2=86.40  all=43.53  detrended_vy2=12.85
+#011  South Africa  m03  zdoy  share_plus_locations__heat_wapr_wmean  agg=std w=103 shift=30 transform=signlog1p
+      robust_min=84.29  vy2=84.58  all=78.43  detrended_vy2=59.76
+#012  South Africa  m03  zdoy  share_only_norm__heat_wapr_wmean  agg=std w=103 shift=30 transform=signlog1p
+      robust_min=84.29  vy2=84.58  all=78.43  detrended_vy2=59.76
+#013  South Africa  m03  zdoy  share_norm_fill1__heat_wapr_wmean  agg=std w=103 shift=30 transform=signlog1p
+      robust_min=84.29  vy2=84.58  all=78.43  detrended_vy2=59.76
+#014  Mexico  m01  zdoy  share_only_norm__wet_dry_wapr_diff  agg=std w=102 shift=-21 transform=signlog1p
+      robust_min=84.01  vy2=85.01  all=82.62  detrended_vy2=59.93
+#015  South Africa  m01  zdoy  share_plus_locations__dry_high_wmean  agg=ma w=180 shift=16 transform=square
+      robust_min=83.99  vy2=85.05  all=83.57  detrended_vy2=66.27
+#016  South Africa  m01  zdoy  share_only_norm__dry_high_wmean  agg=ma w=180 shift=16 transform=square
+      robust_min=83.99  vy2=85.05  all=83.57  detrended_vy2=66.27
+#017  South Africa  m01  zdoy  share_norm_fill1__dry_high_wmean  agg=ma w=180 shift=16 transform=square
+      robust_min=83.99  vy2=85.05  all=83.57  detrended_vy2=66.27
+#018  Mexico  m01  zdoy  share_norm_fill1__wet_dry_wapr_diff  agg=std w=102 shift=-21 transform=signlog1p
+      robust_min=83.88  vy2=84.70  all=82.64  detrended_vy2=61.23
+#019  Mexico  m01  zdoy  share_plus_locations__wet_dry_wapr_diff  agg=std w=102 shift=-21 transform=signlog1p
+      robust_min=83.88  vy2=84.70  all=82.64  detrended_vy2=61.23
+#020  Mexico  m04  zdoy  share_only_norm__wet_high_wmean  agg=std w=122 shift=3 transform=signlog1p
+      robust_min=83.85  vy2=88.64  all=80.97  detrended_vy2=47.64
+#021  Mexico  m04  zdoy  share_norm_fill1__wet_high_wmean  agg=std w=122 shift=3 transform=signlog1p
+      robust_min=83.83  vy2=88.85  all=80.94  detrended_vy2=47.27
+#022  Mexico  m04  zdoy  share_plus_locations__wet_high_wmean  agg=std w=122 shift=3 transform=signlog1p
+      robust_min=83.83  vy2=88.85  all=80.94  detrended_vy2=47.27
+#023  South Africa  m01  zdoy  share_only_norm__dry_high_wmean  agg=ewm w=212 shift=81 transform=square
+      robust_min=83.72  vy2=88.40  all=55.40  detrended_vy2=71.17
+#024  South Africa  m01  zdoy  share_plus_locations__dry_high_wmean  agg=ewm w=212 shift=81 transform=square
+      robust_min=83.72  vy2=88.40  all=55.40  detrended_vy2=71.17
+#025  South Africa  m01  zdoy  share_norm_fill1__dry_high_wmean  agg=ewm w=212 shift=81 transform=square
+      robust_min=83.72  vy2=88.40  all=55.40  detrended_vy2=71.17

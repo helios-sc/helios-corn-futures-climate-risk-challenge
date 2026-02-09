@@ -1,0 +1,23 @@
+Dear Helios Challenge Team,
+
+I am submitting my winner verification materials for the Helios Corn Futures Climate Challenge.
+
+**IMPORTANT COMPLIANCE NOTE:**
+
+Upon final review of my code, I discovered that my 86.85 CFCS submission ("submission_top_5_features.csv") contains features that violate the anti-gaming rules. Specifically, the top features (e.g., "climate_risk_drought_dtw_ma7_x_futures_close_ZC_2") directly incorporate futures market data, which is not permitted.
+
+These features were generated during experimental exploration to understand theoretical limits. Unfortunately, they were inadvertently included in the final submission. I acknowledge this error and take full responsibility.
+
+**My compliant submission is:**
+
+File: `submission_rank_3_feature_optimized.csv`
+CFCS Score: 75.30
+Code: `75.30-submission_rank_3_feature-csv.py`
+
+All `climate_risk_*` features in this submission are derived EXCLUSIVELY from the original climate risk count columns and market share data, with NO futures data used in their computation. The futures columns are used ONLY for correlation evaluation and CFCS scoring.
+
+I respectfully request that you consider my 75.30 CFCS submission for prize eligibility. I deeply apologize for the oversight and appreciate your understanding.
+
+Kaggle Username:dragonaja
+Team Name: DragonAJA
+Email:912539504@qq.com
