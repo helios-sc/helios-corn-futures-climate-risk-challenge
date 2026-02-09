@@ -1,0 +1,42 @@
+External data was used conservatively to confirm whether climate stress translated into real plant stress, without introducing market information or rebuilding a parallel climate model.
+
+Soil Moisture (Physiological Confirmation)
+
+What: Soil moisture anomalies (surface + root zone), combined with greater weight on root-zone moisture.
+Why: Root-zone moisture directly reflects the water available to corn roots and is a strong indicator of actual plant stress.
+How it was used:
+Converted to anomalies (z-scores) relative to local history
+Aggregated at the country level
+Used conservatively as a validation layer alongside Helios climate risk signals
+What it is NOT:
+Not a replacement climate model
+Not a yield estimate
+Not market-derived
+Key constraint respected: Climate-only, public, non-market data.
+
+External Weather (Used Selectively)
+
+What: Limited atmospheric variables such as:
+Vapor Pressure Deficit (VPD)
+Evapotranspiration (ET₀)
+Water Deficit (Precipitation − ET₀)
+Why: These variables capture atmospheric demand and rapid drying dynamics that precipitation alone cannot.
+How it was used:
+As anomalies or trends
+Aggregated conservatively at the country level
+Used only in the exploratory submission, not the primary conservative submission
+What it is NOT:
+Not tuned to futures behavior
+Not used to rebuild Helios’s climate risk model
+Key constraint respected: External weather variables were treated as secondary context, not primary drivers.
+
+To ensure compliance with competition rules and avoid CFCS inflation, the following guardrails were enforced:
+
+❌ No futures_* columns or derivatives were used
+❌ No lagged or transformed market prices
+❌ No features designed to mirror or proxy futures behavior
+✅ All external data is climate-derived and publicly available
+✅ All rolling, cumulative, and seasonal calculations are strictly backward-looking
+✅ External features were used conservatively and sparingly
+
+

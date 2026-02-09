@@ -1,0 +1,5 @@
+instructions to generate csv
+
+step 1 - install required packages from requirements.txt
+step 2 - replace DATA_PATH and OUTPUT_PATH variables with input and output paths
+step 3 - run the file

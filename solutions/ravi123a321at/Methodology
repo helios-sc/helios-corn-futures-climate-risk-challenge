@@ -1,0 +1,101 @@
+Methodology Summary — Helios Corn Futures Climate Challenge
+
+Objective
+
+The objective of this work is to identify biologically and economically meaningful climate signals that translate weather stress into expected corn supply risk, while prioritizing robustness, interpretability, and 
+strict compliance with the competition’s anti-leakage and anti-gaming rules.
+The approach focuses on modeling real agricultural mechanisms rather than mechanically maximizing correlation metrics.
+
+Data Sources
+Competition Data
+Helios Climate Risk Dataset
+Drought stress
+Heat stress
+Cold stress
+Excess precipitation
+Regional Production Share Data
+Used to weight climate exposure by economic importance
+
+External Data (Approved, Limited Scope)
+Soil Moisture Anomalies (Surface + Root Zone)
+Public, climate-derived source
+Root-zone moisture emphasized to reflect actual corn root water availability
+Used solely as physiological confirmation of plant water stress
+Contains no market, price, yield, or futures information
+
+External Atmospheric Indicators (Primary Submission Only)
+Vapor Pressure Deficit (VPD)
+Reference Evapotranspiration (ET₀)
+Water Delicit (Precipitation − ET₀)
+Used only as anomalies or short-term trends to detect rapid drying dynamics
+Not used to reconstruct climate risk or proxy futures behavior
+No other external or proprietary data sources were used.
+
+Feature Engineering Philosophy
+All features were designed to reflect real agricultural and physical mechanisms, not to optimize CFCS mechanically.
+Each feature adheres to the following principles:
+
+Causal Directionality
+Climate conditions → Crop stress → Yield risk → Futures price response
+
+Temporal Integrity
+All features use information available at or before date_on.
+No future data is used directly or indirectly.
+
+Generality
+Signals represent biologically stable relationships expected to persist across years, regions, and market regimes.
+
+Core Feature Categories
+1. Baseline Severity Aggregation
+
+Country-level, production-weighted aggregation of climate risk severity using:
+Mean (average exposure)
+Max (extreme tail risk)
+Dispersion measures (variability and concentration)
+This captures both overall exposure and localized extremes without artificial amplification.
+Spatial Concentration:
+Spatial concentration metrics (Herfindahl–Hirschman Index) are computed to distinguish localized climate shocks from geographically widespread stress, reflecting differences between regional disruptions and systemic supply risk.
+
+2. Persistence and Stress Memory
+
+Rolling, momentum, and cumulative measures capture sustained climate stress, reflecting the biological reality that corn plants accumulate damage over time rather than responding to isolated daily shocks.
+
+3. Phenology Weighting
+
+Climate stress is weighted by crop growth stage to reflect known yield sensitivity during critical development periods such as silking and grain fill.
+Northern and Southern Hemisphere growing calendars are handled separately to preserve biological meaning and avoid seasonal misalignment.
+
+4. Limited Climate Interactions
+
+A small number of climate-only interaction features (e.g., heat × drought) are included to capture known non-linear physiological stress responses. These interactions are biologically motivated and restricted strictly to climate variables.
+
+5. External Physiological Confirmation
+
+Soil moisture anomalies are used to confirm whether observed climatic conditions translate into actual plant water stress, reducing false positives where weather signals do not result in physiological impact.
+In the primary submission, limited atmospheric indicators (VPD, ET₀, and water deficit) are additionally used to detect rapid drying dynamics. External data serves a confirmatory role only and does not replace Helios climate risk signals.
+What Was Explicitly Avoided
+To maintain scientific integrity and avoid metric gaming, the following were intentionally excluded:
+Futures prices, returns, volatility, or any market-derived variables
+Lagged or transformed futures data
+Circular or self-referential feature construction
+Threshold-based amplification designed solely to inflate CFCS
+
+Submission Strategy
+
+Two submissions were produced:
+
+Primary Submission
+
+Includes baseline aggregation, persistence, phenology, spatial concentration, soil moisture, and limited external atmospheric confirmation
+Emphasizes biological realism and economic relevance
+Designed to generalize across historical and future regimes
+
+Secondary Submission 
+
+Includes baseline aggregation, persistence, phenology, and soil moisture only
+Excludes external atmospheric indicators and interaction features
+Provided as a conservative robustness reference
+
+Compliance Confirmation
+I confirm that no futures_* columns or derivatives were used to generate any climate_risk_* features, in full accordance with the competition’s anti-gaming rules.
+All engineered features are derived exclusively from climate, weather, and soil moisture data.

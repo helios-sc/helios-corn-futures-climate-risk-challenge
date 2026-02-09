@@ -1,0 +1,14 @@
+Methodology
+1. Data Sources Used
+Only the host provided dataset is used.
+There is Worldwide Crop Production added to the notebook but it has not been used.
+
+2. Key Steps
+The first half of the code is to ensure same no of rows in submission.
+The main features are obtained by combining each type of risk of a single date into a single value.
+The average percent production of each country in recent years has been added as a dictionary to do this in the code.
+The rationale is that the overall global production has an impact on futures market rather than 
+a single country production.
+Only the top 30 features that correlate the maximum with all targets are kept in final submission.
+
+There is no usage of any futures column to generate a feature.

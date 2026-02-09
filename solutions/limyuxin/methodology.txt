@@ -1,0 +1,7 @@
+I began writing the script by starting from a compact, interpretable vocabulary of climate “stress” primitives, mapping regional low/medium/high risk-location counts into severity-style ratios and a handful of intuitive composites (wet–dry imbalance, temperature/precipitation stress maxima, overall stress), and then expressing each concept as multiple country-level signals under alternative production-weighting schemes. 
+
+I also built an explicit “surprise” version of every signal by removing predictable seasonality with day‑of‑year z‑scores, which turns both the level and anomaly series into testable market hypotheses through lags (timing), windowed aggregation (short shocks vs persistent regimes), and a small set of nonlinear transforms (to capture saturation or convex responses). 
+
+And rather than brute‑force scoring an enormous grid against every futures series, I used a fast proxy for breadth: within each country‑month bucket I extracted the first principal component (PC1) of the futures panel as a common factor and screened for climate features that co‑move with it. The strongest screened hypotheses are then refined with tight local sweeps around lag/window settings and prioritized using the CFCS metric across multiple recent‑year slices (plus a year‑demeaned sanity check), emphasizing candidates that stay broad and stable instead of fitting a single period.
+
+I confirm that no futures_* columns or derivatives were used to generate climate_risk_* features, per the anti-gaming rules.

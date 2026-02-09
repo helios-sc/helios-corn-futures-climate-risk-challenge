@@ -1,0 +1,43 @@
+My approach starts from recognizing that raw region-level climate counts are often too noisy and fragmented to relate cleanly to market outcomes, so I first compressed them into an interpretable country‑day signal by aggregating regional risks in proportion to economic importance and letting the regions that matter most to national production drive the signal. 
+
+I then kept the feature set intentionally small but expressive: a few intuitive stress measures (severity, extreme‑event share, “warning‑or‑worse” share) plus simple interactions that reflect plausible mechanisms (e.g., heat×dry compounding, wet–dry imbalance, max/mean stress across risk types). Because the scoring is correlation-based, I framed feature design as a search over simple time‑series shapes—rolling averages and maxima, volatility, exponential smoothing, and threshold/streak/run‑length style constructs. 
+
+A key insight is that these relationships are often regime‑dependent (seasonal and country‑specific), so I evaluated signals within country-by-month seasonal buckets to isolate when and where a mechanism is active instead of averaging it across unrelated periods. 
+
+Finally, the workflow is deliberately pragmatic: run a fast, broad scan to identify the handful of regimes where signal concentrates, then refine more deeply, prioritizing patterns that remain stable across recent-year subsets.
+
+To ensure replicable results, below was the exact command I ran. It was only afterwards to prevent data leakage that I made sure to personally only select for configurations with shift >=0 to submit, as per my submission notebook.
+
+# To prevent BLAS thread oversubscription with joblib processes
+$env:OMP_NUM_THREADS="1"
+$env:MKL_NUM_THREADS="1"
+$env:OPENBLAS_NUM_THREADS="1"
+$env:NUMEXPR_NUM_THREADS="1"
+
+python -u .\helios_script.py `
+  --main_csv ".\forecasting-the-future-the-helios-corn-climate-challenge\corn_climate_risk_futures_daily_master.csv" `
+  --share_csv ".\forecasting-the-future-the-helios-corn-climate-challenge\corn_regional_market_share.csv" `
+  --out_dir ".\sweep_out_full_allgroups_public_and_robust" `
+  --n_jobs 24 `
+  --time_budget_hours 40 `
+  --resume `
+  --rebuild_cache `
+  --val_years_list "2,3,4,5" `
+  --min_rows 60 `
+  --stage0_keep_per_country_month 18 `
+  --deep_top_groups 0 `
+  --deep_min_proxy 0 `
+  --shift_min -60 `
+  --shift_max 60 `
+  --coarse_shifts "0,-60,-30,30,60" `
+  --w_min 2 `
+  --w_max 2500 `
+  --aggs "ma,max,ewm,std,streakq85,streakthr0.5" `
+  --transforms "identity,square,signlog1p" `
+  --top_windows_keep 60 `
+  --top_pairs_keep 80 `
+  --refine_w_radius 80 `
+  --refine_shift_radius 45 `
+  --save_top 500 `
+  --public_vy 2 `
+  --save_top_public 200

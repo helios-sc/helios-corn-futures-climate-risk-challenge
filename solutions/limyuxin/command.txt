@@ -1,0 +1,46 @@
+# To be true to my development process and to ensure replicable results, this was the exact command that I ran
+# For the final submission, I manually filtered out those with negative shifts to prevent data leakage
+# Refer to the notebook helios.ipynb for the final submission configuration and the methodology.txt file for the rationale behind the script
+
+# --- Threading hygiene (avoid BLAS oversubscription) ---
+$env:OMP_NUM_THREADS="1"
+$env:MKL_NUM_THREADS="1"
+$env:OPENBLAS_NUM_THREADS="1"
+$env:NUMEXPR_NUM_THREADS="1"
+
+# --- Paths ---
+$MainCsv  = ".\forecasting-the-future-the-helios-corn-climate-challenge\corn_climate_risk_futures_daily_master.csv"
+$ShareCsv = ".\forecasting-the-future-the-helios-corn-climate-challenge\corn_regional_market_share.csv"
+
+if (!(Test-Path $MainCsv))  { throw "Missing main CSV:  $MainCsv" }
+if (!(Test-Path $ShareCsv)) { throw "Missing share CSV: $ShareCsv" }
+
+# --- Fresh output dir ---
+$Stamp  = Get-Date -Format "yyyyMMdd_HHmmss"
+$OutDir = ".\alt_sweep_out_15h_$Stamp"
+New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
+
+python -u -W ignore::SyntaxWarning .\sweep_alt_factor_anomaly.py `
+  --main_csv  $MainCsv `
+  --share_csv $ShareCsv `
+  --out_dir   $OutDir `
+  --n_jobs 24 `
+  --resume `
+  --weight_modes "share_norm_fill1,share_only_norm,share_plus_locations" `
+  --variants "raw,zdoy" `
+  --aggs "ma,std,ewm,streakq85,streakthr0.5" `
+  --transforms "identity,square,signlog1p" `
+  --coarse_windows "2,3,5,7,10,14,21,30,45,60,90,98,102,112,120,140,168,180,200,224,240,252,280,300,330,365,400,450,540,600,730,900,1095,1500,2000,2500" `
+  --coarse_shifts "0,-120,-90,-60,-45,-30,-15,15,30,45,60,90,120" `
+  --screen_top_k_per_month 30 `
+  --screen_keep_per_bucket 8 `
+  --screen_min_abs_corr 0.15 `
+  --min_rows_per_month 40 `
+  --val_years_list "2,3,4,5" `
+  --w_min 2 `
+  --w_max 2500 `
+  --shift_min -120 `
+  --shift_max 120 `
+  --refine_w_radius 160 `
+  --refine_shift_radius 75 `
+  --save_top 20000

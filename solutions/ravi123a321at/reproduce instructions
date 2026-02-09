@@ -1,0 +1,20 @@
+Reproduction Instructions (Executive Summary)
+Install dependencies, place the official competition dataset in the data/ directory, and run the primary notebook (final_submission_slim.ipynb) from top to bottom. The notebook deterministically generates outputs/submission.csv, which is identical to the file uploaded to Kaggle.
+## How to Reproduce the Submission
+
+1. Install dependencies:
+   pip install -r requirements.txt
+
+2. Place the official Helios competition dataset in:
+   data/helios_competition_data.csv
+
+3. (Optional) Download external climate data:
+   - Soil moisture and weather data sources are documented in:
+     data/external/README_external_data.md
+   - Scripts automatically download and preprocess data if not present.
+
+4. Run:
+   python notebooks provided
+
+5. The final submission file will be created at:
+   outputs/submission.csv

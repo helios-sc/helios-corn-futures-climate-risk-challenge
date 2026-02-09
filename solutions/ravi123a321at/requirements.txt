@@ -1,0 +1,8 @@
+Python version:
+Python 3.9+
+
+python>=3.9
+pandas>=1.5
+numpy>=1.23
+scipy>=1.9
+xarray>=2022.6.0

@@ -1,0 +1,69 @@
+Feature Engineering Pipeline (Primary Submission)
+
+This notebook implements a deterministic, fully reproducible pipeline that transforms climate risk data into economically interpretable stress signals aligned with corn supply dynamics.
+
+1. Data Sources Used
+Competition Data (Primary)
+Helios Climate Risk Data
+Daily country-level climate risk scores
+Risk categories: drought, heat stress, excess precipitation, unseasonable cold
+Scores reflect crop-specific tolerance thresholds
+
+Production Share Data
+Used to weight regional climate risk by economic relevance
+Futures Market Data
+Used only for evaluation
+No futures variables are used in feature construction
+External Data (Confirmatory Only)
+Used strictly to answer: “Is the plant actually stressed?”
+Soil Moisture (Root + Surface)
+Root-zone weighted (70%) + surface (30%)
+Converted to 30-day z-score anomalies
+External Weather Variables
+Vapor Pressure Deficit (VPD)
+Reference Evapotranspiration (ET₀)
+Water Deficit (Precip − ET₀)
+Used only as anomalies or trends
+No external market, price, yield, or forecast data was used.
+
+2. Feature Engineering Pipeline (Step-by-Step)
+
+Step 1: Baseline Climate Aggregation
+For each country and day:
+Production-weighted aggregation of climate risk
+Mean, max, standard deviation, sum
+Spatial concentration (HHI) to detect localized vs widespread stress
+Purpose: Establish baseline severity and spatial distribution of climate stress.
+
+Step 2: Temporal Dynamics (Persistence & Change)
+Rolling volatility (14d / 30d)
+Momentum features (7d / 14d deltas)
+Streak length (consecutive stress days)
+Cumulative seasonal stress (“stress memory”)
+Purpose: Capture biological reality that stress accumulates over time.
+
+Step 3: Phenology Alignment (Biological Timing)
+Country-specific growing season weighting
+Northern Hemisphere: June–August emphasis
+Southern Hemisphere: January–February emphasis
+Applied to drought and heat stress only
+Purpose: Stress matters most during biologically sensitive growth stages.
+
+Step 4: Non-Linear & Interaction Signals
+Heat × Drought (compound stress)
+Cold × Excess precipitation
+Lagged Brazil drought (South → North signal)
+Hemisphere mismatch (simultaneous NH + SH stress)
+Purpose: Capture failure modes that emerge only when multiple stresses coincide.
+
+Step 5: External Physiological Confirmation
+Soil moisture anomaly (root-zone emphasized)
+VPD anomaly and trend
+Water deficit anomaly and trend
+Purpose: Confirm whether climate risk translated into real plant stress
+Not used to rebuild climate indices or proxy market behavior.
+
+Step 6: Monthly Aggregation (Evaluation Alignment)
+Daily features aggregated to monthly level
+Mean / max aggregation depending on feature intent
+Ensures alignment with CFCS monthly correlation computation

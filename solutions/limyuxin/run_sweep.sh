@@ -1,0 +1,25 @@
+#!/bin/bash
+/home/chhayly-sreng/helios/helios-kaggle-competition/venv/bin/python -u -W ignore::SyntaxWarning sweep_alt_factor_anomaly.py \
+  --main_csv  ./corn_climate_risk_futures_daily_master.csv \
+  --share_csv ./corn_regional_market_share.csv \
+  --out_dir   ./alt_sweep_out \
+  --n_jobs 4 \
+  --resume \
+  --weight_modes "share_norm_fill1,share_only_norm,share_plus_locations" \
+  --variants "raw,zdoy" \
+  --aggs "ma,std,ewm,streakq85,streakthr0.5" \
+  --transforms "identity,square,signlog1p" \
+  --coarse_windows "2,3,5,7,10,14,21,30,45" \
+  --coarse_shifts "0,-15,15,30" \
+  --screen_top_k_per_month 30 \
+  --screen_keep_per_bucket 8 \
+  --screen_min_abs_corr 0.15 \
+  --min_rows_per_month 40 \
+  --val_years_list "2,3,4,5" \
+  --w_min 2 \
+  --w_max 2500 \
+  --shift_min -120 \
+  --shift_max 120 \
+  --refine_w_radius 160 \
+  --refine_shift_radius 75 \
+  --save_top 20000
