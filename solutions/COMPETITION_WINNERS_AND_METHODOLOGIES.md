@@ -218,7 +218,7 @@ Systematic approach generating massive feature combinations (aggregations, lags,
 
 ### 1. [limyuxin](https://www.kaggle.com/limyuxin)
 
-**CFCS Score:** 88.82 (Rank 46 - Not awarded prize)
+**CFCS Score:** 88.82
 
 **Strategy:** Brute Force Factor Mining
 
@@ -759,8 +759,6 @@ Domain-driven approach incorporating **phenology** (crop growth stages) to weigh
 ---
 
 ### 13. [osamurai](https://www.kaggle.com/osamurai)
-
-**CFCS Score:** 72.33 (Rank 72)
 
 #### Strategy: Comprehensive Feature Engineering with LightGBM-Based Transformations
 
