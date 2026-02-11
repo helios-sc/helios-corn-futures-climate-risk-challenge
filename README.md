@@ -40,9 +40,9 @@ Plus a chance to earn a full-time or internship position at [Helios AI](https://
 ### 🏅 Competition Winners & Results
 
 **Final Leaderboard (Top 3):**
-- 🥇 **1st Place**: [DragonAJA](https://www.kaggle.com/dragonaja) - **86.85 CFCS**
-- 🥈 **2nd Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS**  
-- 🥉 **3rd Place**: [cg](https://www.kaggle.com/chaitanyagarg2) - **82.35 CFCS**
+- 🥇 **1st Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS**
+- 🥈 **2nd Place**: [cg](https://www.kaggle.com/chaitanyagarg2) - **82.35 CFCS**  
+- 🥉 **3rd Place**: [ezberch](https://www.kaggle.com/ezberch) - **80.47 CFCS**
 
 **📊 Comprehensive Methodology Report**
 
