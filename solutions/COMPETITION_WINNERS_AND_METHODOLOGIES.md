@@ -876,18 +876,19 @@ Systematic feature engineering pipeline covering production-weighted risks, seas
 
 ### Top Performing Approaches
 
-**Winners (Final scores pending):**
-1. **limyuxin** - 1st Place: Brute Force Factor Mining
-2. **DragonAJA** - 2nd Place: Massive Feature Engineering & Optimization
-3. **yukanglimofficial** - 3rd Place: Deep Sweep Grid Search
+**Competition Winners:**
+1. **yukanglimofficial** - 1st Place (84.20 CFCS): Deep Sweep Grid Search
+2. **cg** - 2nd Place (82.35 CFCS): Global Production-Weighted Risk
+3. **ezberch** - 3rd Place (80.47 CFCS): Parallel Correlation Mining
 
-**Notable Approaches:**
-- **kadircandrisolu** - Single cumulative drought feature
-- **cg** - Production-weighted global risk
-- **PxlPau** - Power law + hemispheric gating
-- **cmasch** - Agronomic 439 features
-- **DragonAJA** - 1,471 features, compliant run
-- **aaaml007** - Quantile binning
+**Notable High Performers:**
+- **limyuxin** - 88.82 CFCS : Brute Force Factor Mining with PC1 proxy
+- **DragonAJA** - 75.30 CFCS : 12 transformation methods, 1,471+ features
+- **kadircandrisolu** - 79.26 CFCS: Single cumulative drought feature (minimalist approach)
+- **chetank99** - 77.07 CFCS: Relative risk ratios with harvest gating
+- **ganeshstemx** - 78.17 CFCS: Temporal quantile binning
+- **bluetriad** - 76.29 CFCS: Climate oscillation integration
+- **cmasch** - 69.01 CFCS: Agronomic feature engineering (439 features)
 
 ### Key Metrics Comparison
 
