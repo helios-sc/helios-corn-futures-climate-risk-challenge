@@ -10,9 +10,9 @@
 1. [Executive Summary](#executive-summary)
 2. [Participant Methodologies](#participant-methodologies)
    - [Competition Winners](#competition-winners)
-     - [1st Place: DragonAJA](#-1st-place---dragonaja)
-     - [2nd Place: yukanglimofficial](#-2nd-place---yukanglimofficial)
-     - [3rd Place: cg](#-3rd-place---cg)
+     - [1st Place: yukanglimofficial](#-1st-place---yukanglimofficial)
+     - [2nd Place: cg](#-2nd-place---cg)
+     - [3rd Place: ezberch](#-3rd-place---ezberch)
    - [Other Participants](#other-participants)
    - [limyuxin](#1-limyuxin)
    - [cmasch](#2-cmasch)
@@ -22,7 +22,7 @@
    - [PxlPau](#6-pxlpau)
    - [aaaml007](#7-aaaml007)
    - [chetank99](#8-chetank99)
-   - [ezberch](#9-ezberch)
+   - [DragonAJA](#9-dragonaja)
    - [ganeshstemx](#10-ganeshstemx)
    - [kadircandrisolu](#11-kadircandrisolu)
    - [ravi123a321at](#12-ravi123a321at)
@@ -37,9 +37,9 @@
 This report documents the methodologies used by participants in the Helios Corn Futures Climate Challenge Kaggle competition. Each participant attempted to engineer climate risk features that correlate with corn futures prices. The approaches range from simple rolling averages to sophisticated AutoEncoder neural networks and exhaustive grid searches.
 
 **Competition Winners:**
-- 🥇 **1st Place**: [DragonAJA](https://www.kaggle.com/dragonaja) - **86.85 CFCS** (Rank 48) - Massive Feature Engineering & Optimization
-- 🥈 **2nd Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS** (Rank 49) - Deep Sweep Grid Search
-- 🥉 **3rd Place**: [cg](https://www.kaggle.com/chaitanyagarg2) - **82.35 CFCS** (Rank 68) - Global Production-Weighted Risk
+- 🥇 **1st Place**: [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) - **84.20 CFCS** (Rank 49) - Deep Sweep Grid Search
+- 🥈 **2nd Place**: [cg](https://www.kaggle.com/chaitanyagarg2) - **82.35 CFCS** (Rank 54) - Global Production-Weighted Risk
+- 🥉 **3rd Place**: [ezberch](https://www.kaggle.com/ezberch) - **80.47 CFCS** (Rank 63) - Parallel Correlation Mining
 
 **Notable Mentions:**
 - **Rank 46**: limyuxin - **88.82 CFCS** - Brute Force Factor Mining
@@ -58,9 +58,9 @@ This report documents the methodologies used by participants in the Helios Corn 
 
 | Participant | Strategy | CFCS Score | Uniqueness |
 |-------------|----------|------------|------------|
-| 🥇 [DragonAJA](https://www.kaggle.com/dragonaja) | Massive Feature Engineering & Optimization | **86.85** | 12 transformation methods, iterative feature refinement, CFCS-driven optimization |
-| 🥈 [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) | Deep Sweep Grid Search | **84.20** | Comprehensive parameter space exploration with stability validation |
-| 🥉 [cg](https://www.kaggle.com/chaitanyagarg2) | Global Production-Weighted Risk | **82.35** | Global risk hypothesis, economic weighting throughout, momentum layers |
+| 🥇 [yukanglimofficial](https://www.kaggle.com/yukanglimofficial) | Deep Sweep Grid Search | **84.20** | Comprehensive parameter space exploration with stability validation |
+| 🥈 [cg](https://www.kaggle.com/chaitanyagarg2) | Global Production-Weighted Risk | **82.35** | Global risk hypothesis, economic weighting throughout, momentum layers |
+| 🥉 [ezberch](https://www.kaggle.com/ezberch) | Parallel Correlation Mining | **80.47** | Macro-climate linkage (ENSO, PDO), parallel feature scanning |
 | [limyuxin](https://www.kaggle.com/limyuxin) | Brute Force Factor Mining | 88.82 | Systematic caching pipeline + parameter sweep across 1000+ combinations |
 | [cmasch](https://www.kaggle.com/cmasch) | Agronomic Feature Engineering | 69.01 | GDD deficit, stress day counting, grain fill period masking |
 | [bluetriad](https://www.kaggle.com/bluetriad) | Climate Oscillation Integration | 76.29 | Climate technicals, cumulative sums, CFCS-aware selection |
@@ -68,9 +68,8 @@ This report documents the methodologies used by participants in the Helios Corn 
 | [Mr RRR](https://www.kaggle.com/larrylin666) | AutoEncoder Feature Extraction | 66.33 | Only deep learning submission, neural network latent space compression |
 | [PxlPau](https://www.kaggle.com/studybeetutoring) | Signal Sharpening | 59.67 | Power law (risk²), hemispheric gating, acreage battle modeling |
 | [aaaml007](https://www.kaggle.com/aaaml007) | Production-Weighted Multi-Timescale | 100.00 | Comprehensive lag structure (7-90 days), production-weighted aggregation |
-| [cg](https://www.kaggle.com/chaitanyagarg2) | Global Production-Weighted Risk | 82.35 | Global risk hypothesis, economic weighting throughout, momentum layers |
 | [chetank99](https://www.kaggle.com/chetank99) | Relative Risk Ratios | 77.07 | Ratio signals (local/global), harvest window focus, non-linear panic modeling |
-| [ezberch](https://www.kaggle.com/ezberch) | Parallel Correlation Mining | 80.47 | Macro-climate linkage (ENSO, PDO), parallel feature scanning |
+| [DragonAJA](https://www.kaggle.com/dragonaja) | Massive Feature Engineering & Optimization | **75.30** | 12 transformation methods, iterative feature refinement, CFCS-driven optimization |
 | [ganeshstemx](https://www.kaggle.com/ganeshstemx) | Temporal Quantile Binning | 78.17 | Non-overlapping time segments, compound interactions, non-drought inverse signals |
 | [kadircandrisolu](https://www.kaggle.com/kadircandrisolu) | Ultra-Long Window Cumulative Drought | 79.26 | Extreme parsimony (single feature), 400+ day windows, cumulative tracking |
 | [ravi123a321at](https://www.kaggle.com/ravi123a321at) | Phenology-Weighted Stress | 64.02 | HHI concentration metric, growth-stage-aware weighting, biological time scales |
@@ -84,56 +83,7 @@ This report documents the methodologies used by participants in the Helios Corn 
 
 ## Competition Winners
 
-### 🥇 1st Place - [DragonAJA](https://www.kaggle.com/dragonaja)
-
-**CFCS Score:** **86.85**
-
-**Strategy:** Massive Feature Engineering & Optimization
-
-**Core Approach:**  
-Generated **2000+ candidate features** through 12 distinct transformation methods applied to 68 baseline features. Implements comprehensive temporal aggregations (7/14/30-day windows) with multiple statistics (mean, max, std, min, skew, kurt). Uses quantile normalization, Box-Cox/Yeo-Johnson transforms, z-score standardization, and polynomial features. Note: Highest compliant submission scored 75.30 CFCS (rank 3 features); 86.85 CFCS submission was disqualified for using futures data in feature engineering.
-
-**The 12 Transformation Methods:**
-1. **Quantile Normalization:** Rank-based scaling to [0,1]
-2. **Box-Cox/Yeo-Johnson:** Variance stabilization, normality approximation
-3. **Robust Scaling:** Median/IQR based, outlier resistant
-4. **Power Transformations:** Square, sqrt, log
-5. **Binning/Encoding:** Decile bins with one-hot encoding
-6. **Lag Features:** Shifted values at 7, 14 days
-7. **Rolling Statistics:** Mean, std, min, max over windows
-8. **EWMA:** Exponential weighted moving averages (α=0.1, 0.3, 0.5)
-9. **Difference Features:** 1d, 2d, 7d changes
-10. **Cumulative Features:** cumsum, cummax, cummin
-11. **Seasonal Decomposition:** Trend, seasonal, residual components
-12. **Original Feature:** Untransformed baseline
-
-**Selection Strategy:**
-- **Stage 1 (Correlation Filtering):** Drops features with <400 significant correlations across all country-month buckets
-- **Stage 2 (Forward Selection):** Starts with required columns, iteratively adds features only if CFCS increases
-- **Per-Feature Optimization:** Tests all 12 transformation methods per baseline feature, selects best performer
-- **CFCS-Aware Pruning:** Aggressive filtering improves sig_count percentage in CFCS formula
-
-**Results:**
-- **Compliant submission:** 75.30 CFCS using rank 3 features
-- **Disqualified submission:** 86.85 CFCS (used futures data - rule violation)
-- Top compliant features: Production-weighted risk scores, composite stress indices, rolling aggregations
-
-**Uniqueness:**
-- **Optimization vs Prediction:** Constructs variables that maximize the specific scoring metric
-- **Per-Feature Transform Selection:** Each feature gets its optimal transformation
-- **Forecast Proxy:** Uses `shift(-30)` on climate data as "30-day weather forecast"
-- Comprehensive transformation library covering every major statistical technique
-- Explicit awareness of compliance—disabled non-compliant modules for final submission
-
-**Why This Won:**
-- Exhaustive exploration of transformation space (12 methods × multiple parameters)
-- Direct optimization of the competition metric (CFCS)
-- Strong feature selection reducing 1,471 to 50 high-quality features
-- Compliance-first approach ensuring valid submission
-
----
-
-### � 2nd Place - [yukanglimofficial](https://www.kaggle.com/yukanglimofficial)
+### 🥇 1st Place - [yukanglimofficial](https://www.kaggle.com/yukanglimofficial)
 
 **CFCS Score:** **84.20**
 
@@ -170,7 +120,7 @@ Pragmatic regime-dependent evaluation within country-by-month seasonal buckets t
 
 ---
 
-### 🥉 3rd Place - [cg](https://www.kaggle.com/chaitanyagarg2)
+### 🥈 2nd Place - [cg](https://www.kaggle.com/chaitanyagarg2)
 
 **CFCS Score:** **82.35**
 
@@ -205,6 +155,60 @@ Hypothesizes that global aggregate production-weighted climate risk has stronger
 - Comprehensive momentum modeling captures both levels and changes
 - Clean feature selection process with 30 high-quality features
 - Successfully reproduced submission with gradient boosting approach
+
+---
+
+### 🥉 3rd Place - [ezberch](https://www.kaggle.com/ezberch)
+
+**CFCS Score:** **80.47**
+
+**Strategy:** Parallel Correlation Mining with Macro-Climate Indices
+
+**Core Approach:**  
+Systematic approach generating massive feature combinations (aggregations, lags, transformations) and scanning them in parallel batches for high correlation with futures. Integrates external macro-climate indices (ONI, PDO, MJO) to link local crop stress to global climate oscillations. Uses greedy search with 90% correlation cap to prevent selecting nearly identical features.
+
+**Feature Engineering Steps:**
+1. **Base Features:** Climate risk counts (Low/Med/High × Heat/Drought/Precip)
+2. **Aggregation Methods:**
+   - Rolling windows: 450, 500 days with mean/max/sum
+   - EMA (Exponential Moving Average): Long-term trend tracking
+   - STD (Standard Deviation): Variability/risk uncertainty quantification
+   - TURB (Turbulence): Volatility of rapid changes
+3. **Lag Features:** Time-shifted values (7, 30, 60, 90 days) to model delayed market reactions
+4. **Power Transformations:** P1.0 (linear), P2.0 (squared), P3.0 (cubed) to isolate tail risks
+5. **External Macro-Climate Indices:**
+   - ONI (Oceanic Niño Index) - ENSO/El Niño-La Niña tracking
+   - PDO (Pacific Decadal Oscillation) - Long-term Pacific SST patterns
+   - MJO (Madden-Julian Oscillation) - Intra-seasonal tropical precipitation
+   - Lagged to prevent future data leakage
+6. **Composite Signals:**
+   - US_Stress_x_Nina_Primed: US heat/drought amplified by La Niña conditions
+   - BR_Heat_Drought: Combined Brazil heat and drought stress
+   - BR_Sum_heat_stress: Brazil summer heat stress focus
+7. **Parallel Processing:** Batch-based correlation scanning across feature space
+8. **Greedy Feature Selection:** Top N features by absolute Pearson correlation with 90% max inter-feature correlation
+
+**Top 5 Features (External Data Version):**
+1. `climate_risk_EMA_climate_risk_US_Stress_x_Nina_Primed_P2.0_W500` - 500-day trend of US stress during La Niña
+2. `climate_risk_TURB_climate_risk_US_Stress_x_Nina_Primed_120_L60_P1.0_W500` - Volatility aftershocks from La Niña
+3. `climate_risk_TURB_BR_Sum_heat_stress_L30_P2.0_W500` - Brazil summer heat stress turbulence
+4. `climate_risk_STD_climate_risk_US_Stress_x_Nina_Primed_P2.0_W500` - US La Niña stress variability
+5. `climate_risk_TURB_BR_Sum_heat_stress_L90_P2.0_W500` - Brazil heat stress with 90-day market lag
+
+**Uniqueness:**
+- **Macro-Climate Linkage:** Connects local crop stress to planetary-scale climate drivers (ENSO, PDO, MJO)
+- **Parallel Architecture:** Efficiently scans large feature spaces through batch processing
+- **Scientific Grounding:** Established climate science (ENSO teleconnections) integration
+- **Multi-Scale Modeling:** Combines fine-grained local risks with coarse global oscillations
+- **Correlation Cap:** 90% threshold prevents redundant feature selection
+- **Tail Risk Focus:** Power transformations (squared/cubed) isolate extreme events
+
+**Why This Won:**
+- Domain knowledge integration with established climate science teleconnections
+- Efficient parallel processing for large-scale feature exploration
+- Strong scientific foundation linking local and global climate patterns
+- Systematic greedy search with diversity constraint (90% correlation cap)
+- Successfully reproduced with two versions (with/without external data)
 
 ---
 
@@ -552,42 +556,59 @@ Hypothesis: Local climate risk impact depends on **global context**—high local
 
 ---
 
-### 9. [ezberch](https://www.kaggle.com/ezberch)
+### 9. [DragonAJA](https://www.kaggle.com/dragonaja)
 
-#### Strategy: Parallel Correlation Mining with Macro-Climate Indices
+**CFCS Score:** 75.30
+
+#### Strategy: Massive Feature Engineering & Optimization
 
 **Core Approach:**  
-Generates massive feature combinations (aggregations, lags, transformations) and scans them in parallel batches for high correlation with futures. Integrates external macro-climate indices (ONI, PDO) to link local crop stress to global climate oscillations.
+Generated **2000+ candidate features** through 12 distinct transformation methods applied to 68 baseline features. Implements comprehensive temporal aggregations (7/14/30-day windows) with multiple statistics (mean, max, std, min, skew, kurt). Uses quantile normalization, Box-Cox/Yeo-Johnson transforms, z-score standardization, and polynomial features. Note: Highest compliant submission scored 75.30 CFCS (rank 3 features); 86.85 CFCS submission was disqualified for using futures data in feature engineering.
 
 **Actual Implementation:**
-1. **Base Features:** Climate risk counts (Low/Med/High × Heat/Drought/Precip)
-2. **Aggregation Features:** Rolling windows (7, 14, 30, 60, 90 days) with mean/max/sum
-3. **Lag Features:** Time-shifted values (1, 7, 14, 30, 60 days)
-4. **External Macro-Climate Indices:**
-   - ONI (Oceanic Niño Index) - ENSO tracking
-   - PDO (Pacific Decadal Oscillation)
-   - From `external_oni.csv`, `external_indices.csv`
-5. **Feature Combinations:** Risk × indices interactions
-6. **Parallel Processing:** Batch-based correlation scanning across feature space
-7. **Selection:** Top N features by absolute Pearson correlation
-8. **Modeling:** Gradient boosting or linear models
 
-**Status:** Long-running execution (>2 hours for full run, partial verification)
+**The 12 Transformation Methods:**
+1. **Quantile Normalization:** Rank-based scaling to [0,1]
+2. **Box-Cox/Yeo-Johnson:** Variance stabilization, normality approximation
+3. **Robust Scaling:** Median/IQR based, outlier resistant
+4. **Power Transformations:** Square, sqrt, log
+5. **Binning/Encoding:** Decile bins with one-hot encoding
+6. **Lag Features:** Shifted values at 7, 14 days
+7. **Rolling Statistics:** Mean, std, min, max over windows
+8. **EWMA:** Exponential weighted moving averages (α=0.1, 0.3, 0.5)
+9. **Difference Features:** 1d, 2d, 7d changes
+10. **Cumulative Features:** cumsum, cummax, cummin
+11. **Seasonal Decomposition:** Trend, seasonal, residual components
+12. **Original Feature:** Untransformed baseline
+
+**Selection Strategy:**
+- **Stage 1 (Correlation Filtering):** Drops features with <400 significant correlations across all country-month buckets
+- **Stage 2 (Forward Selection):** Starts with required columns, iteratively adds features only if CFCS increases
+- **Per-Feature Optimization:** Tests all 12 transformation methods per baseline feature, selects best performer
+- **CFCS-Aware Pruning:** Aggressive filtering improves sig_count percentage in CFCS formula
+
+**Results:**
+- **Compliant submission:** 75.30 CFCS using rank 3 features
+- **Disqualified submission:** 86.85 CFCS (used futures data - rule violation)
+- Top compliant features: Production-weighted risk scores, composite stress indices, rolling aggregations
 
 #### Uniqueness
-- **Macro-Climate Linkage:** Connects local crop stress to planetary-scale climate drivers (El Niño/La Niña, PDO)
-- **Parallel Architecture:** Efficiently scans large feature spaces
-- **Scientific Grounding:** ENSO impacts global weather patterns—scientifically justified
+- **Optimization vs Prediction:** Constructs variables that maximize the specific scoring metric
+- **Per-Feature Transform Selection:** Each feature gets its optimal transformation
+- **Forecast Proxy:** Uses `shift(-30)` on climate data as "30-day weather forecast"
+- Comprehensive transformation library covering every major statistical technique
+- Explicit awareness of compliance—disabled non-compliant modules for final submission
 
 #### Creativity
-- **Domain Knowledge Integration:** Incorporates established climate science (ENSO, PDO teleconnections)
-- **Multi-Scale Modeling:** Combines fine-grained local risks with coarse global oscillations
+- Exhaustive exploration of transformation space (12 methods × multiple parameters)
+- Direct optimization of the competition metric (CFCS)
+- Strong feature selection reducing 1,471 to 50 high-quality features
 
 #### Flaws
-- **Brute Force Risk:** High spurious correlation probability without multiple testing corrections (e.g., Bonferroni, FDR)
-- **Extremely Long Runtime:** >2 hours execution time limits iterative development
-- **Multiple Testing Problem:** No apparent p-value adjustment for hundreds/thousands of hypothesis tests
-- **Overfitting Potential:** Top correlations on train set may not generalize
+- **Disqualification Issue:** Highest scoring submission (86.85) violated rules by using futures data
+- **Overfitting Risk:** Excessive feature generation (2000+) may overfit to training data
+- **Computational Cost:** Testing 12 transformations per feature is resource-intensive
+- **Interpretability:** Complex transformation pipelines difficult to explain to stakeholders
 
 ---
 
@@ -926,5 +947,5 @@ Systematic feature engineering pipeline covering production-weighted risks, seas
 
 ---
 
-> **Last Updated:** 2026-02-09  
+> **Last Updated:** 2026-02-10  
 > **Reviewed By:** Helios AI
